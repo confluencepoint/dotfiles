@@ -9,9 +9,9 @@ fi
 
 cd ${DOTFILES_DIRECTORY}
 
-source ./init/help
-source ./init/utils
-source ./init/npm
+source ./lib/help
+source ./lib/utils
+source ./lib/npm
 
 # Help text
 if [[ "$1" == "-h" || "$1" == "--help" ]] ; then
