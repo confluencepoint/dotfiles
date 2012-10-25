@@ -15,6 +15,6 @@ export HISTCONTROL=ignoredups
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 
 # If these bins exist, then add them to the PATH
-[ -d "$HOME/.dotfiles/bin" ] && PATH="$HOME/.dotfiles/bin";
+[ -d "$HOME/.dotfiles/bin" ] && PATH="$PATH:$HOME/.dotfiles/bin";
 
 export PATH
