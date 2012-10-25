@@ -1,0 +1,101 @@
+#!/bin/bash
+
+DOTFILES_DIRECTORY="${HOME}/.dotfiles"
+
+# Clone the dotfiles if the directory is missing
+if [[ ! -d ${DOTFILES_DIRECTORY} ]] ; then
+  git clone --recursive git://github.com/kevva/dotfiles.git ${DOTFILES_DIRECTORY}
+fi
+
+cd ${DOTFILES_DIRECTORY}
+
+source ./init/help
+source ./init/utils
+source ./init/npm
+
+# Help text
+if [[ "$1" == "-h" || "$1" == "--help" ]] ; then
+  run_help
+  exit
+fi
+
+# Test for known flags
+for opt in $@
+do
+  case $opt in
+    --no-packages) skip_packages=true ;;
+    --no-update) skip_update=true ;;
+    -*|--*) e_warning "Warning: invalid option $opt" ;;
+  esac
+done
+
+# Check for git
+if [[ ! "$(type -P git)" ]] ; then
+  e_error "Git must be installed first."
+  echo "http://msysgit.github.com"
+  exit 1
+fi
+
+# Clone the dotfiles if the directory is missing
+if [[ ! -d ${DOTFILES_DIRECTORY} ]] ; then
+  e_header "Downloading dotfiles..."
+  # Clone the GitHub repo
+  git clone --recursive git://github.com/kevva/dotfiles.git ${DOTFILES_DIRECTORY}
+# Otherwise conditionally update repo and/or package installations
+else
+  if [[ $skip_update ]] ; then
+    echo "Skipped dotfiles update."
+  else
+    e_header "Updating dotfiles..."
+    # Pull down the latest changes
+    git pull --rebase origin master
+    # Return to previous working directory
+  fi
+
+  # Install and update packages
+  if [[ $skip_packages ]] ; then
+    echo "Skipped package installations."
+  else
+    echo "Updating packages..."
+    # Install Node packages
+    run_npm
+  fi
+fi
+
+link() {
+  # Force create/replace the symlink.
+  ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+}
+
+mirrorfiles() {
+  # Copy `.gitconfig`.
+  # Any global git commands in `~/.bash_profile.local` will be written to
+  # `.gitconfig`. This prevents them being committed to the repository.
+  cp -av ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+
+  # Create the necessary symbolic links between the `.dotfiles` and `HOME`
+  # directory. The `bash_profile` sources other files directly from the
+  # `.dotfiles` repository.
+  link "bash/bashrc"        ".bashrc"
+  link "bash/bash_profile"  ".bash_profile"
+  link "bash/inputrc"       ".inputrc"
+  link "git/gitattributes"  ".gitattributes"
+  link "git/gitconfig"      ".gitconfig"
+  link "git/gitignore"      ".gitignore"
+
+  e_success "Dotfiles update complete!"
+}
+
+# Verify that the user wants to proceed before potentially overwriting files
+echo
+e_warning "Warning: This may overwrite your existing dotfiles."
+read -p "Continue? (y/n) " -n 1
+echo
+
+if [[ $REPLY == y ]] ; then
+  mirrorfiles
+  source ${HOME}/.bash_profile
+else
+  echo "Aborting..."
+  exit 1
+fi

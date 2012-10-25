@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Header logging
+e_header() {
+  echo -e "\n\033[0;37m$@\033[m";
+}
+
+# Success logging
+e_success() {
+  echo -e "\033[0;32m✓ $@\033[m";
+}
+
+# Error logging
+e_error() {
+  echo -e "\033[0;31mx $@\033[m";
+}
+
+# Warning logging
+e_warning() {
+  echo -e "\033[0;33m! $@\033[m";
+}
+
+# Test whether a command exists
+# $1 - cmd to test
+type_exists() {
+  if [[ `type -P $1` ]]; then
+    return 0
+  fi
+  return 1
+}

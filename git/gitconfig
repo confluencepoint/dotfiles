@@ -1,0 +1,86 @@
+[alias]
+  # https://git.wiki.kernel.org/articles/a/l/i/Aliases.html
+
+  # `git remote prune origin`: remove remote-tracking branches that were deleted from the remote repo
+  # `git gc`: cleanup unnecessary files and optimize the local repository
+  # `git clean -df`: remove untracked files and directories from the working tree
+  # `git stash clear`: remove all stashed states
+  trim = !git remote prune origin && git gc
+  cleanup = !git clean -df && git stash clear
+
+  # Add untracked, remove deleted, and show status
+  adda = !git add -A && git status
+
+  # Commit all changes
+  ca = !git add -A && git commit -av
+
+  # Switch to a branch, creating it if necessary
+  go = checkout
+
+  # Diff what is staged for the next commit
+  diffc = diff --cached
+  # Diff overview
+  diffst = diff --stat
+
+  # Pull in remote changes for the current repository and all its submodules
+  p = !"git pull; git submodule foreach git pull origin master"
+
+  # Clone a repository including all submodules
+  c = clone --recursive
+
+  # Interactive rebase with the given number of latest commits
+  reb = "!r() { git rebase -i HEAD~$1; }; r"
+
+  # Custom graph log
+  graph = log --pretty=nice --all --date-order --graph
+  # Custom pretty log
+  logp = log --pretty=nice --date-order
+
+  # Diffstat log
+  logst = log --stat
+  # Short format diffstat log
+  logsf = log --stat --format=oneline --abbrev-commit
+
+  # Display the number of commits per author in numerical order
+  who = shortlog -sn --
+
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+
+  # Credit an author on the latest commit
+  credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+
+  # Undo a `git push`
+  undopush = push -f origin HEAD^:master
+
+  # Undo a `git commit`
+  undocommit = reset --hard HEAD^
+
+[color]
+  # color opts: normal, black, red, green, yellow, blue, magenta, cyan, or white
+  ui = auto
+  interactive = auto
+
+[core]
+  # Use custom `.gitignore` and `.gitattributes`
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
+
+[diff]
+  tool = mvimdiff
+
+[difftool]
+  prompt = false
+
+[pretty]
+  # tut: http://gitimmersion.com/lab_10.html
+  # ref: http://linux.die.net/man/1/git-log
+  # Result: <short-sha> <commit-message> (<pointer-names>) -- <commit-author-name>; <relative-time>
+  nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
+
+# Use `origin` as the default remote on the `master` branch in all cases
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
