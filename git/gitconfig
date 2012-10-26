@@ -33,6 +33,8 @@
 
   # Custom graph log
   graph = log --pretty=nice --all --date-order --graph
+  # Custom graph log for all branches
+  grapha = log --pretty=nice --date-order --graph --all
   # Custom pretty log
   logp = log --pretty=nice --date-order
 
