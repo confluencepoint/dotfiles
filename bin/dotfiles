@@ -4,6 +4,7 @@ DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 
 # Clone the dotfiles if the directory is missing
 if [[ ! -d ${DOTFILES_DIRECTORY} ]] ; then
+  echo -e "\n\033[0;37mDownloading dotfiles...\033[m";
   git clone --recursive git://github.com/kevva/dotfiles.git ${DOTFILES_DIRECTORY}
 fi
 
@@ -36,30 +37,23 @@ if [[ ! "$(type -P git)" ]] ; then
   exit 1
 fi
 
-# Clone the dotfiles if the directory is missing
-if [[ ! -d ${DOTFILES_DIRECTORY} ]] ; then
-  e_header "Downloading dotfiles..."
-  # Clone the GitHub repo
-  git clone --recursive git://github.com/kevva/dotfiles.git ${DOTFILES_DIRECTORY}
-# Otherwise conditionally update repo and/or package installations
+# Conditionally update repo and/or package installations
+if [[ $skip_update ]] ; then
+  echo "Skipped dotfiles update."
 else
-  if [[ $skip_update ]] ; then
-    echo "Skipped dotfiles update."
-  else
-    e_header "Updating dotfiles..."
-    # Pull down the latest changes
-    git pull --rebase origin master
-    # Return to previous working directory
-  fi
+  e_header "Updating dotfiles..."
+  # Pull down the latest changes
+  git pull --rebase origin master
+  # Return to previous working directory
+fi
 
-  # Install and update packages
-  if [[ $skip_packages ]] ; then
-    echo "Skipped package installations."
-  else
-    echo "Updating packages..."
-    # Install Node packages
-    run_npm
-  fi
+# Install and update packages
+if [[ $skip_packages ]] ; then
+  echo "Skipped package installations."
+else
+  echo "Updating packages..."
+  # Install Node packages
+  run_npm
 fi
 
 link() {
@@ -80,7 +74,6 @@ mirrorfiles() {
   link "bash/bash_profile"  ".bash_profile"
   link "bash/inputrc"       ".inputrc"
   link "git/gitattributes"  ".gitattributes"
-  link "git/gitconfig"      ".gitconfig"
   link "git/gitignore"      ".gitignore"
 
   e_success "Dotfiles update complete!"
