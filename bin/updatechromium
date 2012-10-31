@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ "$OSTYPE" == msys* ]]; then
+  # Configuration
+  chromiumtype="snapshots"
+  chromiumurl="http://commondatastorage.googleapis.com/chromium-browser-$chromiumtype/Win"
+  chromiumlatest=$(curl -f -s $chromiumurl/LAST_CHANGE)
+
+  # Get latest version
+  echo -e "\n\033[0;37mDownloading Chromium...\033[m";
+  curl -fLo ~/Downloads/chromium-$chromiumlatest.exe $chromiumurl/$chromiumlatest/mini_installer.exe
+
+  # Run the installer
+  echo -e "\n\033[0;37mInstalling Chromium...\033[m";
+  ~/Downloads/chromium-$chromiumlatest.exe
+
+  # Clean up
+  rm -rf ~/Downloads/chromium-$chromiumlatest.exe
+
+  # Finish
+  echo -e "\n\033[0;32mSuccessfully installed Chromium...\033[m";
+else
+  echo -e "\n\033[0;37mThe Chromium Update script is currently only available for Windows.\033[m";
+fi
