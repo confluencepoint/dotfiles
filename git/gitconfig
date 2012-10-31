@@ -28,6 +28,9 @@
   # Clone a repository including all submodules
   c = clone --recursive
 
+  # Show status in short format
+  st = status -s
+
   # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
 
