@@ -30,13 +30,6 @@ elif [[ "$OSTYPE" == msys* ]]; then
   )
 fi
 
-declare -a bins=(
-  "/usr/bin"
-  "$HOME/bin"
-  "$HOME/.dotfiles/bin"
-  "$HOME/.rvm/bin"
-)
-
 # If these bins exist, then add them to the PATH
 for index in ${!bins[*]}
 do
