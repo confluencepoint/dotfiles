@@ -16,6 +16,23 @@ export HISTCONTROL=ignoredups
 # Make some commands not show up in history
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 
+if [[ "$OSTYPE" == darwin* ]]; then
+  # OS X
+  declare -a bins=(
+    "/usr/bin"
+    "$HOME/bin"
+    "$HOME/.dotfiles/bin"
+    "$HOME/.rvm/bin"
+    "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
+    "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
+  )
+elif [[ "$OSTYPE" == msys* ]]; then
+  # Windows
+  declare -a bins=(
+    "$HOME/.dotfiles/bin"
+  )
+fi
+
 declare -a bins=(
   "/usr/bin"
   "$HOME/bin"

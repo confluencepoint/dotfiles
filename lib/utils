@@ -28,3 +28,24 @@ type_exists() {
   fi
   return 1
 }
+
+# Test whether a Homebrew formula is already installed
+# $1 - formula name (may include options)
+formula_exists() {
+  if ! `brew list $1 >/dev/null`; then
+    e_warning "Missing formula: $1"
+    return 1
+  fi
+
+  echo $1 "already installed."
+  return 0
+}
+
+# Test which OS the user runs
+# $1 - cmd to test
+os_is() {
+  if [[ "$OSTYPE" == $1* ]]; then
+    return 0
+  fi
+  return 1
+}

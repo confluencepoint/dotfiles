@@ -3,8 +3,13 @@
 # bash_prompt
 
 # Based on @gf3’s Sexy Bash Prompt: https://github.com/gf3/dotfiles
-# Console2 prefs: import Solarized theme
 # More tips: http://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
+#
+# OS X
+# iTerm2 prefs: import Solarized theme (disable bright colors for bold text)
+#
+# Windows
+# Console2 prefs: import Solarized theme
 
 # Example:
 # kevva@host: ~/.dotfiles on master[!?]
@@ -12,17 +17,35 @@
 
 # Base styles and color palette
 # Solarized colors
-BOLD="\033[1m"
-RESET="\033[m"
-SOLAR_YELLOW="\033[0;33m"
-SOLAR_ORANGE="\033[1;31m"
-SOLAR_RED="\033[0;31m"
-SOLAR_MAGENTA="\033[0;35m"
-SOLAR_VIOLET="\033[1;35m"
-SOLAR_BLUE="\033[0;34m"
-SOLAR_CYAN="\033[0;36m"
-SOLAR_GREEN="\033[0;32m"
-SOLAR_WHITE="\033[1;37m"
+if [[ "$OSTYPE" == darwin* ]]; then
+  # OS X
+  # https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized
+  BOLD=$(tput bold)
+  RESET=$(tput sgr0)
+  SOLAR_YELLOW=$(tput setaf 136)
+  SOLAR_ORANGE=$(tput setaf 166)
+  SOLAR_RED=$(tput setaf 124)
+  SOLAR_MAGENTA=$(tput setaf 125)
+  SOLAR_VIOLET=$(tput setaf 61)
+  SOLAR_BLUE=$(tput setaf 33)
+  SOLAR_CYAN=$(tput setaf 37)
+  SOLAR_GREEN=$(tput setaf 64)
+  SOLAR_WHITE=$(tput setaf 254)
+elif [[ "$OSTYPE" == msys* ]]; then
+  # Windows
+  # https://github.com/stevenharman/console2-solarized
+  BOLD="\033[1m"
+  RESET="\033[m"
+  SOLAR_YELLOW="\033[0;33m"
+  SOLAR_ORANGE="\033[1;31m"
+  SOLAR_RED="\033[0;31m"
+  SOLAR_MAGENTA="\033[0;35m"
+  SOLAR_VIOLET="\033[1;35m"
+  SOLAR_BLUE="\033[0;34m"
+  SOLAR_CYAN="\033[0;36m"
+  SOLAR_GREEN="\033[0;32m"
+  SOLAR_WHITE="\033[1;37m"
+fi
 
 style_user="\[${RESET}${SOLAR_ORANGE}\]"
 style_host="\[${RESET}${SOLAR_YELLOW}\]"
@@ -31,10 +54,10 @@ style_chars="\[${RESET}${SOLAR_WHITE}\]"
 style_branch="${SOLAR_CYAN}"
 
 if [[ "$SSH_TTY" ]]; then
-  # connected via ssh
+  # Connected via ssh
   style_host="\[${BOLD}${SOLAR_RED}\]"
 elif [[ "$USER" == "root" ]]; then
-  # logged in as root
+  # Logged in as root
   style_user="\[${BOLD}${SOLAR_RED}\]"
 fi
 

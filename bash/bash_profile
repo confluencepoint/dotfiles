@@ -20,6 +20,16 @@ done
 
 unset files
 
+if [[ "$OSTYPE" == darwin* ]]; then
+  # Only use `brew` after it has been added to the PATH
+  bash_completion_path="$(brew --prefix)/etc/bash_completion"
+
+  # Source Bash completion (installed via Homebrew)
+  if [[ -r $bash_completion_path ]]; then
+    source $bash_completion_path
+  fi
+fi
+
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 

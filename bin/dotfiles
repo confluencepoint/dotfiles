@@ -12,6 +12,7 @@ cd ${DOTFILES_DIRECTORY}
 
 source ./lib/help
 source ./lib/utils
+source ./lib/brew
 source ./lib/npm
 
 # Help text
@@ -30,11 +31,29 @@ do
   esac
 done
 
+# Before relying on Homebrew, check that packages can be compiled (OS X)
+if os_is 'darwin'; then
+  if ! type_exists 'gcc'; then
+    e_error "The XCode Command Line Tools must be installed first."
+    echo "  https://developer.apple.com/downloads"
+    exit 1
+  fi
+fi
+
 # Check for git
-if [[ ! "$(type -P git)" ]] ; then
-  e_error "Git must be installed first."
-  echo "http://msysgit.github.com"
-  exit 1
+if ! type_exists 'git'; then
+  # Install git through Homebrew (OS X)
+  if os_is 'darwin'; then
+    e_header "Updating Homebrew..."
+    brew update
+    e_header "Installing Git..."
+    brew install git
+  # Give installation instructions (Windows)
+  elif os_is 'msys'; then
+    e_error "Git must be installed first."
+    echo "http://msysgit.github.com"
+    exit 1
+  fi
 fi
 
 # Conditionally update repo and/or package installations
@@ -52,6 +71,10 @@ if [[ $skip_packages ]] ; then
   echo "Skipped package installations."
 else
   echo "Updating packages..."
+  # Install Homebrew formulae (OS X)
+  if os_is 'darwin'; then
+    run_brew
+  fi
   # Install Node packages
   run_npm
 fi

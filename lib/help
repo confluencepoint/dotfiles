@@ -1,7 +1,6 @@
 #!/bin/bash
 
 run_help() {
-
 cat <<EOT
 
 Windows dotfiles - Kevin Martensson - http://kevinmartensson.com/
@@ -17,5 +16,4 @@ Documentation can be found at https://github.com/kevva/dotfiles/
 Copyright (c) Kevin Martensson
 Licensed under the MIT license."
 EOT
-
 }

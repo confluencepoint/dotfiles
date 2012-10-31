@@ -1,11 +1,13 @@
 # Dotfiles
 
-My Windows dotfiles.
+My dotfiles for Windows and OS X.
+
+## Prerequisites
+
+* **OS X**: [XCode Command Line Tools](https://developer.apple.com/downloads)
+* **Windows**: [Git for Windows](http://msysgit.github.com/)
 
 ## Installation
-
-You need to install the [Git for Windows](http://msysgit.github.com/) prior to
-installing these dotfiles.
 
 The installation step may overwrite existing dotfiles in your HOME directory.
 
@@ -18,6 +20,20 @@ configuration taking place is not accidentally committed. Everything else is
 symlinked.
 
 ## What else does it install?
+
+via Homebrew (OS X)
+
+* GNU core utilities
+* [git](http://git-scm.com/)
+* [ack](http://betterthangrep.com/)
+* [bash-completion](http://bash-completion.alioth.debian.org/)
+* libjpeg
+* [macvim](http://code.google.com/p/macvim/)
+* [node](http://nodejs.org/)
+* [optipng](http://optipng.sourceforge.net/)
+* [phantomjs](http://phantomjs.org/)
+* [tree](http://mama.indstate.edu/users/ice/tree/)
+* [wget](http://www.gnu.org/software/wget/)
 
 via npm
 

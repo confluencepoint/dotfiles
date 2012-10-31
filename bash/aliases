@@ -26,7 +26,34 @@ alias lat="ls -AGFoth"
 alias catn="cat -n"
 
 # Copy my public key to my clipboard
-alias pubkey="cat ~/.ssh/id_rsa.pub | clip | echo '=> Public key copied to pasteboard.'"
+if [[ "$OSTYPE" == darwin* ]]; then
+  # OS X
+  alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+elif [[ "$OSTYPE" == msys* ]]; then
+  # Windows
+  alias pubkey="cat ~/.ssh/id_rsa.pub | clip | echo '=> Public key copied to pasteboard.'"
+fi
 
 # Get npm updates, and their installed packages
 alias update='npm update npm -g; npm update -g'
+
+# OS X specific
+if [[ "$OSTYPE" == darwin* ]]; then
+  # Flush DNS cache
+  alias flushdns="dscacheutil -flushcache"
+
+  # Empty the Trash on all mounted volumes and the main HDD (OS X)
+  # Also, clear Apple’s System Logs to improve shell startup speed
+  alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+  # Recursively delete `.DS_Store` files (OS X)
+  alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+  # Show/hide hidden files in Finder (OS X)
+  alias showdotfiles="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
+  alias hidedotfiles="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
+
+  # Hide/show all desktop icons (useful when presenting) (OS X)
+  alias showdeskicons="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+  alias hidedeskicons="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+fi
