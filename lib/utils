@@ -1,23 +1,48 @@
 #!/bin/bash
 
+# Test which OS the user runs
+# $1 - cmd to test
+os_is() {
+  if [[ "$OSTYPE" == $1* ]]; then
+    return 0
+  fi
+  return 1
+}
+
 # Header logging
 e_header() {
-  echo -e "\n\033[0;37m$@\033[m";
+  if os_is 'darwin'; then
+    echo -e "\n$(tput setaf 7)$@$(tput sgr0)";
+  else
+    echo -e "\n\033[0;37m$@\033[m";
+  fi
 }
 
 # Success logging
 e_success() {
-  echo -e "\033[0;32m✓ $@\033[m";
+  if os_is 'darwin'; then
+    echo -e "$(tput setaf 64)✓ $@$(tput sgr0)";
+  else
+    echo -e "\033[0;32m✓ $@\033[m";
+  fi
 }
 
 # Error logging
 e_error() {
-  echo -e "\033[0;31mx $@\033[m";
+  if os_is 'darwin'; then
+    echo -e "$(tput setaf 1)x $@$(tput sgr0)";
+  else
+    echo -e "\033[0;31mx $@\033[m";
+  fi
 }
 
 # Warning logging
 e_warning() {
-  echo -e "\033[0;33m! $@\033[m";
+  if os_is 'darwin'; then
+    echo -e "$(tput setaf 136)! $@$(tput sgr0)";
+  else
+    echo -e "\033[0;33m! $@\033[m";
+  fi
 }
 
 # Test whether a command exists
@@ -39,13 +64,4 @@ formula_exists() {
 
   echo $1 "already installed."
   return 0
-}
-
-# Test which OS the user runs
-# $1 - cmd to test
-os_is() {
-  if [[ "$OSTYPE" == $1* ]]; then
-    return 0
-  fi
-  return 1
 }
