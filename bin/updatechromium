@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Update Chromium to latest revision
+
 if [[ "$OSTYPE" == msys* ]]; then
   # Configuration
   chromiumtype="snapshots"
