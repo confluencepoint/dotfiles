@@ -2,10 +2,22 @@
 
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 
-# Clone the dotfiles if the directory is missing
+# Download and extract the repository to the home directory if the directory is missing
 if [[ ! -d ${DOTFILES_DIRECTORY} ]] ; then
-  echo -e "\n\033[0;37mDownloading dotfiles...\033[m";
-  git clone --recursive git://github.com/kevva/dotfiles.git ${DOTFILES_DIRECTORY}
+  echo -e "\n\033[0;37mDownloading dotfiles...\033[m"
+  # Make .dotfiles directory in home
+  mkdir ${DOTFILES_DIRECTORY}
+  # Use curl to get the tarball of the github repository
+  curl -fLo ${HOME}/dotfiles.tar.gz https://github.com/kevva/dotfiles/tarball/master
+  # Extract to our .dotfiles directory
+  tar -zxvf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${DOTFILES_DIRECTORY}
+  # Remove the tarball
+  rm -rf ${HOME}/dotfiles.tar.gz
+  # Initialize git repository when first installing
+  init_git="y"
+# If .dotfiles directory exist; make it available for updates
+else
+  can_update="y"
 fi
 
 cd ${DOTFILES_DIRECTORY}
@@ -56,17 +68,31 @@ if ! type_exists 'git'; then
   fi
 fi
 
-# Conditionally update repo and/or package installations
-if [[ $skip_update ]] ; then
-  echo "Skipped dotfiles update."
-else
-  e_header "Updating dotfiles..."
-  # Pull down the latest changes
+# Initialize git repository
+if [[ $init_git == y ]] ; then
+  e_header "Initialize git repository..."
+  git init
+  # Add remote
+  git remote add origin https://github.com/kevva/dotfiles.git
+  # Remove untracked files
+  git clean -fd
+  # Pull down git repo
   git pull --rebase origin master
-  # Return to previous working directory
 fi
 
-# Install and update packages
+# Conditionally update repo
+if [[ $can_update == y ]] ; then
+  if [[ $skip_update ]] ; then
+    echo "Skipped dotfiles update."
+  else
+    e_header "Updating dotfiles..."
+    # Pull down the latest changes
+    git pull --rebase origin master
+    # Return to previous working directory
+  fi
+fi
+
+# Conditionally install and update packages
 if [[ $skip_packages ]] ; then
   echo "Skipped package installations."
 else
