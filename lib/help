@@ -3,7 +3,7 @@
 run_help() {
 cat <<EOT
 
-Windows dotfiles - Kevin Martensson - http://kevinmartensson.com/
+Windows and OS X dotfiles - Kevin Martensson - http://kevinmartensson.com/
 
 Usage: $(basename "$0") [options]
 
