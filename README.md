@@ -73,6 +73,9 @@ Here is an example `~/.bash_profile.local`:
 PATH=$PATH:~/.gem/ruby/1.8/bin
 export PATH
 
+# Make vim the default editor
+export EDITOR="vim"
+
 # Git credentials
 # Not under version control to prevent people from
 # accidentally committing with your details
