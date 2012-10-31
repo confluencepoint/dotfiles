@@ -22,5 +22,6 @@ if [[ "$OSTYPE" == msys* ]]; then
   # Finish
   echo -e "\n\033[0;32mSuccessfully installed Chromium...\033[m";
 else
-  echo -e "\n\033[0;37mThe Chromium Update script is currently only available for Windows.\033[m";
+  echo -e "\n\033[0;31mThe Chromium Update script is currently only available for Windows.\033[m";
 fi
+
