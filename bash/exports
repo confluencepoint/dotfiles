@@ -2,9 +2,6 @@
 
 # exports
 
-# Make Sublime Text 2 the default editor
-export EDITOR="sublime_text -w"
-
 # Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
