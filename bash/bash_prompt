@@ -91,6 +91,9 @@ function prompt_git() {
   echo -ne "${SOLAR_WHITE} on ${style_branch}${output}"
 }
 
+# Set title to current path
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
+
 # Build the prompt
 PS1="\n" # Newline
 PS1+="${style_user}\u" # Username
