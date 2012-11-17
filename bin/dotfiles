@@ -74,10 +74,11 @@ if [[ $init_git == y ]] ; then
   git init
   # Add remote
   git remote add origin https://github.com/kevva/dotfiles.git
+  # Pull down git repo
+  git fetch origin master
+  git reset --hard FETCH_HEAD
   # Remove untracked files
   git clean -fd
-  # Pull down git repo
-  git pull --rebase origin master
 fi
 
 # Conditionally update repo
