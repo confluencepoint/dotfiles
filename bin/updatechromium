@@ -23,7 +23,7 @@ if os_is 'msys'; then
   rm -rf ${HOME}/chromium-$chromiumlatest.exe
 
   # Finish
-  e_success "Successfully installed Chromium..."
+  e_success "Successfully installed Chromium."
 else
   e_error "The Chromium Update script is currently only available for Windows."
 fi
