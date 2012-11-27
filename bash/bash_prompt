@@ -7,9 +7,11 @@
 #
 # OS X
 # iTerm2 prefs: import Solarized theme (disable bright colors for bold text)
+# https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized
 #
 # Windows
 # Console2 prefs: import Solarized theme
+# https://github.com/stevenharman/console2-solarized
 
 # Example:
 # kevva@host: ~/.dotfiles on master[!?]
@@ -23,9 +25,8 @@ fi
 
 # Base styles and color palette
 # Solarized colors
-if [[ "$OSTYPE" == darwin* ]]; then
-  # OS X
-  # https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized
+if $(tput setaf 1 &> /dev/null); then
+  tput sgr 0 0
   BOLD=$(tput bold)
   RESET=$(tput sgr0)
   SOLAR_YELLOW=$(tput setaf 136)
@@ -37,9 +38,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   SOLAR_CYAN=$(tput setaf 37)
   SOLAR_GREEN=$(tput setaf 64)
   SOLAR_WHITE=$(tput setaf 254)
-elif [[ "$OSTYPE" == msys* ]]; then
-  # Windows
-  # https://github.com/stevenharman/console2-solarized
+else
   BOLD="\033[1m"
   RESET="\033[m"
   SOLAR_YELLOW="\033[0;33m"
