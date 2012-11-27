@@ -121,7 +121,7 @@ function prompt_git() {
 
   # Combine the branch name and state information
   if [[ $git_state ]]; then
-      git_info="$git_info[$git_state]"
+    git_info="$git_info[$git_state]"
   fi
 
   printf "${SOLAR_WHITE} on ${style_branch}${git_info}"
