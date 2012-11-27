@@ -7,21 +7,55 @@ My dotfiles for Windows and OS X.
 * **OS X**: [XCode Command Line Tools](https://developer.apple.com/downloads)
 * **Windows**: [Git for Windows](http://msysgit.github.com/)
 
-## Installation
+## How to install
 
 The installation step may overwrite existing dotfiles in your HOME directory.
 
 ```bash
-bash -c "$(curl -fsSL https://raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
+$ bash -c "$(curl -fsSL https://raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 ```
 
 The `.gitconfig` file is copied to the HOME directory so that any private git
 configuration taking place is not accidentally committed. Everything else is
 symlinked.
 
-## What else does it install?
+## How to update
 
-via Homebrew (OS X)
+You should run the update when:
+
+* You make a change to `~/.dotfiles/git/gitconfig` (the only file that is
+  copied rather than symlinked).
+* You want to pull changes from the remote repository.
+* You want to update Homebrew formulae and Node packages.
+
+Run the dotfiles command:
+
+```bash
+$ dotfiles
+```
+
+Options:
+
+<table>
+  <tr>
+    <td><code>-h</code>, <code>--help</code></td>
+    <td>Help</td>
+  </tr>
+  <tr>
+    <td><code>--no-packages</code></td>
+    <td>Suppress package updates</td>
+  </tr>
+  <tr>
+    <td><code>--no-sync</code></td>
+    <td>Suppress pulling from the remote repository</td>
+  </tr>
+</table>
+
+## Features
+
+### Automatic software installation
+
+Homebrew formulae (OS X):
 
 * GNU core utilities
 * [git](http://git-scm.com/)
@@ -35,27 +69,17 @@ via Homebrew (OS X)
 * [tree](http://mama.indstate.edu/users/ice/tree/)
 * [wget](http://www.gnu.org/software/wget/)
 
-via npm
+Node packages:
 
 * [bower](http://twitter.github.com/bower/)
 * [grunt](http://gruntjs.com/)
 
-## Updating
+### Custom OS X defaults
 
-This must be done when:
-
-* You make a change to `~/.dotfiles/git/gitconfig` (the only file that isn't symlinked).
-* You want to pull and apply changes from the remote repository.
-* You want to update packages.
+Custom OS X settings can be applied by running the following command:
 
 ```bash
-dotfiles
-```
-
-There are options available to suppress package updates and/or pulling from the remote repository.
-
-```bash
-dotfiles --no-packages --no-updates
+$ osxdefaults
 ```
 
 ## Adding local and private configurations
