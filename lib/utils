@@ -12,36 +12,36 @@ os_is() {
 # Header logging
 e_header() {
   if os_is 'darwin'; then
-    printf -e "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
+    printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
   else
-    printf -e "\n\033[0;37m%s\033[m\n" "$@"
+    printf "\n\033[0;37m%s\033[m\n" "$@"
   fi
 }
 
 # Success logging
 e_success() {
   if os_is 'darwin'; then
-    printf -e "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
+    printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
   else
-    printf -e "\033[0;32m✓ %s\033[m\n" "$@"
+    printf "\033[0;32m✓ %s\033[m\n" "$@"
   fi
 }
 
 # Error logging
 e_error() {
   if os_is 'darwin'; then
-    printf -e "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
+    printf "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
   else
-    printf -e "\033[0;31mx %s\033[m\n" "$@"
+    printf "\033[0;31mx %s\033[m\n" "$@"
   fi
 }
 
 # Warning logging
 e_warning() {
   if os_is 'darwin'; then
-    printf -e "$(tput setaf 136)! %s$(tput sgr0)\n" "$@"
+    printf "$(tput setaf 136)! %s$(tput sgr0)\n" "$@"
   else
-    printf -e "\033[0;33m! %s\033[m\n" "$@"
+    printf "\033[0;33m! %s\033[m\n" "$@"
   fi
 }
 

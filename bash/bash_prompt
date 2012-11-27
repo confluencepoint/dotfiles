@@ -124,7 +124,7 @@ function prompt_git() {
       git_info="$git_info[$git_state]"
   fi
 
-  printf -ne "${SOLAR_WHITE} on ${style_branch}${git_info}"
+  printf "${SOLAR_WHITE} on ${style_branch}${git_info}"
 }
 
 # Build the prompt
