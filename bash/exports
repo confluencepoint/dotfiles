@@ -16,7 +16,7 @@ export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 # Set title to current path
 export PROMPT_COMMAND="printf '\033]0;${PWD/$HOME/~}\007'"
 
-if [[ "$OSTYPE" == darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   # OS X
   declare -a bins=(
     "/usr/bin"
@@ -26,7 +26,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
     "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
     "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
   )
-elif [[ "$OSTYPE" == msys* ]]; then
+elif [[ $OSTYPE == msys* ]]; then
   # Windows
   declare -a bins=(
     "$HOME/.dotfiles/bin"

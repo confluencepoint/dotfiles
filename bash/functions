@@ -21,9 +21,9 @@ function server() {
   local port="${1:-8000}"
 
   # Open in the browser
-  if [[ "$OSTYPE" == darwin* ]]; then
+  if [[ $OSTYPE == darwin* ]]; then
     open "http://localhost:${port}/"
-  elif [[ "$OSTYPE" == msys* ]]; then
+  elif [[ $OSTYPE == msys* ]]; then
     start "http://localhost:${port}/"
   fi
 
