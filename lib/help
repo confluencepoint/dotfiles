@@ -8,8 +8,8 @@ Windows and OS X dotfiles - Kevin Martensson - http://kevinmartensson.com/
 Usage: $(basename "$0") [options]
 
 Options:
-  --no-packages   skips installation and update of packages
-  --no-update     skips updating the repo and submodules
+  --no-packages   Suppress package updates
+  --no-sync       Suppress pulling from the remote repository
 
 Documentation can be found at https://github.com/kevva/dotfiles/
 
