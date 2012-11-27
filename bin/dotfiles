@@ -6,7 +6,7 @@ DOTFILES_GIT_REMOTE="https://github.com/kevva/dotfiles"
 
 # Download and extract the repository to the home directory if the directory is missing
 if [[ ! -d ${DOTFILES_DIRECTORY} ]] ; then
-  echo -e "\n\033[0;37mDownloading dotfiles...\033[m"
+  printf -e "\n\033[0;37mDownloading dotfiles...\033[m\n"
   # Make .dotfiles directory in home
   mkdir ${DOTFILES_DIRECTORY}
   # Use curl to get the tarball of the github repository
@@ -44,7 +44,7 @@ done
 if os_is 'darwin'; then
   if ! type_exists 'gcc'; then
     e_error "The XCode Command Line Tools must be installed first."
-    echo "  https://developer.apple.com/downloads"
+    printf "  https://developer.apple.com/downloads\n"
     exit 1
   fi
 fi
@@ -60,7 +60,7 @@ if ! type_exists 'git'; then
   # Give installation instructions (Windows)
   elif os_is 'msys'; then
     e_error "Git must be installed first."
-    echo "http://msysgit.github.com"
+    printf "http://msysgit.github.com\n"
     exit 1
   fi
 fi
@@ -79,7 +79,7 @@ fi
 
 # Conditionally update repo
 if [[ $skip_update ]] ; then
-  echo "Skipped dotfiles update."
+  printf "Skipped dotfiles update.\n"
 else
   e_header "Updating dotfiles..."
   # Pull down the latest changes
@@ -89,9 +89,9 @@ fi
 
 # Conditionally install and update packages
 if [[ $skip_packages ]] ; then
-  echo "Skipped package installations."
+  printf "Skipped package installations.\n"
 else
-  echo "Updating packages..."
+  printf "Updating packages...\n"
   # Install Homebrew formulae (OS X)
   if os_is 'darwin'; then
     run_brew
@@ -124,15 +124,15 @@ mirrorfiles() {
 }
 
 # Verify that the user wants to proceed before potentially overwriting files
-echo
+printf "\n"
 e_warning "Warning: This may overwrite your existing dotfiles."
 read -p "Continue? (y/n) " -n 1
-echo
+printf "\n"
 
 if [[ $REPLY == y ]] ; then
   mirrorfiles
   source ${HOME}/.bash_profile
 else
-  echo "Aborting..."
+  printf "Aborting...\n"
   exit 1
 fi

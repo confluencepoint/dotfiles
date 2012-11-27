@@ -15,7 +15,7 @@ run_npm() {
   else
     echo
     e_error "Error: npm not found."
-    echo "Aborting..."
+    echo "Aborting...\n"
     exit
   fi
 }

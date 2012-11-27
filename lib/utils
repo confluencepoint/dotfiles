@@ -12,36 +12,36 @@ os_is() {
 # Header logging
 e_header() {
   if os_is 'darwin'; then
-    echo -e "\n$(tput setaf 7)$@$(tput sgr0)";
+    printf -e "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
   else
-    echo -e "\n\033[0;37m$@\033[m";
+    printf -e "\n\033[0;37m%s\033[m\n" "$@"
   fi
 }
 
 # Success logging
 e_success() {
   if os_is 'darwin'; then
-    echo -e "$(tput setaf 64)✓ $@$(tput sgr0)";
+    printf -e "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
   else
-    echo -e "\033[0;32m✓ $@\033[m";
+    printf -e "\033[0;32m✓ %s\033[m\n" "$@"
   fi
 }
 
 # Error logging
 e_error() {
   if os_is 'darwin'; then
-    echo -e "$(tput setaf 1)x $@$(tput sgr0)";
+    printf -e "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
   else
-    echo -e "\033[0;31mx $@\033[m";
+    printf -e "\033[0;31mx %s\033[m\n" "$@"
   fi
 }
 
 # Warning logging
 e_warning() {
   if os_is 'darwin'; then
-    echo -e "$(tput setaf 136)! $@$(tput sgr0)";
+    printf -e "$(tput setaf 136)! %s$(tput sgr0)\n" "$@"
   else
-    echo -e "\033[0;33m! $@\033[m";
+    printf -e "\033[0;33m! %s\033[m\n" "$@"
   fi
 }
 
@@ -65,11 +65,11 @@ type_exists() {
 # Test whether a Homebrew formula is already installed
 # $1 - formula name (may include options)
 formula_exists() {
-  if ! `brew list $1 >/dev/null`; then
-    e_warning "Missing formula: $1"
-    return 1
+  if $(brew list $1 >/dev/null); then
+    printf %s "already installed.\n" "$1"
+    return 0
   fi
 
-  echo $1 "already installed."
+  e_warning "Missing formula: $1"
   return 0
 }
