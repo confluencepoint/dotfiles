@@ -28,13 +28,8 @@ function server() {
   fi
 
   if [[ $version == 2 ]]; then
-    # Redefining the default content-type to text/plain instead of the default
-    # application/octet-stream allows "unknown" files to be viewable in-browser
-    # as text instead of being downloaded.
-    #
-    # Unfortunately, "python -m SimpleHTTPServer" doesn't allow you to redefine
-    # the default content-type, but the SimpleHTTPServer module can be executed
-    # manually with just a few lines of code.
+    # Set the default Content-Type to `text/plain` instead of
+    # `application/octet-stream`.
     python -c $'import SimpleHTTPServer;\nSimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map[""] = "text/plain";\nSimpleHTTPServer.test();' "$port"
   elif [[ $version == 3 ]]; then
     python -m http.server "$port"
