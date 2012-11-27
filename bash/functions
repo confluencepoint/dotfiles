@@ -14,28 +14,31 @@ function f() {
 
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
+  # Get Python version
+  local version=`python -c $'import sys;\nprint (sys.version_info[0])'`
+
   # Get port (if specified)
   local port="${1:-8000}"
 
   # Open in the browser
-  open "http://localhost:${port}/"
+  if [[ "$OSTYPE" == darwin* ]]; then
+    open "http://localhost:${port}/"
+  elif [[ "$OSTYPE" == msys* ]]; then
+    start "http://localhost:${port}/"
+  fi
 
-  # Redefining the default content-type to text/plain instead of the default
-  # application/octet-stream allows "unknown" files to be viewable in-browser
-  # as text instead of being downloaded.
-  #
-  # Unfortunately, "python -m SimpleHTTPServer" doesn't allow you to redefine
-  # the default content-type, but the SimpleHTTPServer module can be executed
-  # manually with just a few lines of code.
-  python -c $'import SimpleHTTPServer;\nSimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map[""] = "text/plain";\nSimpleHTTPServer.test();' "$port"
-}
-
-# Get gzipped size
-function gz() {
-  echo "orig size    (bytes): "
-  cat "$1" | wc -c
-  echo "gzipped size (bytes): "
-  gzip -c "$1" | wc -c
+  if [[ $version == 2 ]]; then
+    # Redefining the default content-type to text/plain instead of the default
+    # application/octet-stream allows "unknown" files to be viewable in-browser
+    # as text instead of being downloaded.
+    #
+    # Unfortunately, "python -m SimpleHTTPServer" doesn't allow you to redefine
+    # the default content-type, but the SimpleHTTPServer module can be executed
+    # manually with just a few lines of code.
+    python -c $'import SimpleHTTPServer;\nSimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map[""] = "text/plain";\nSimpleHTTPServer.test();' "$port"
+  elif [[ $version == 3 ]]; then
+    python -m http.server "$port"
+  fi
 }
 
 # Take this repo and copy it to somewhere else minus the .git stuff.
