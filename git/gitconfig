@@ -9,42 +9,41 @@
   cleanup = !git clean -df && git stash clear
 
   # Add untracked, remove deleted, and show status
-  adda = !git add -A && git status
+  a = !git add -A && git status
+
+  # Commit selected changes
+  ca = !git add $1 && git commit -v
 
   # Commit all changes
-  ca = !git add -A && git commit -av
+  caa = !git add -A && git commit -av
+
+  # Show status in short format
+  s = status -s
 
   # Switch to a branch, creating it if necessary
-  go = checkout
+  go = checkout -B
 
-  # Diff what is staged for the next commit
-  diffc = diff --cached
-  # Diff overview
-  diffst = diff --stat
+  # Show the diff between the latest commit and the current state
+  d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
-  # Pull in remote changes for the current repository and all its submodules
-  p = !"git pull; git submodule foreach git pull origin master"
+  # Shows the diff between the state `$number` revisions ago and the current
+  # state
+  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+  # View the SHA, description, and history graph
+  l = log --pretty=nice --date-order --graph --all
 
   # Clone a repository including all submodules
   c = clone --recursive
 
-  # Show status in short format
-  st = status -s
+  # Pull in remote changes for the current repository and all its submodules
+  p = !"git pull; git submodule foreach git pull origin master"
 
   # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
 
-  # Custom graph log
-  graph = log --pretty=nice --all --date-order --graph
-  # Custom graph log for all branches
-  grapha = log --pretty=nice --date-order --graph --all
-  # Custom pretty log
-  logp = log --pretty=nice --date-order
-
-  # Diffstat log
-  logst = log --stat
-  # Short format diffstat log
-  logsf = log --stat --format=oneline --abbrev-commit
+  # Credit an author on the latest commit
+  credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
   # Display the number of commits per author in numerical order
   who = shortlog -sn --
@@ -53,9 +52,6 @@
   tags = tag -l
   branches = branch -a
   remotes = remote -v
-
-  # Credit an author on the latest commit
-  credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
   # Undo a `git push`
   undopush = push -f origin HEAD^:master
