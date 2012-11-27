@@ -51,7 +51,7 @@ if [[ $OSTYPE == darwin* ]]; then
   # Also, clear Apple’s System Logs to improve shell startup speed
   alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 elif [[ $OSTYPE == msys* ]]; then
-  alias emptytrash="rm -rf $SYSTEMDRIVE/\$Recycle.bin"
+  alias emptytrash="rm -rf '$SYSTEMDRIVE/\$Recycle.bin'"
 fi
 
 # OS X specific
