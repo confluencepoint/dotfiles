@@ -20,7 +20,7 @@ done
 
 unset files
 
-if [[ "$OSTYPE" == darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
   # Only use `brew` after it has been added to the PATH
   bash_completion_path="$(brew --prefix)/etc/bash_completion"
 
