@@ -403,4 +403,4 @@ for app in "Address Book" "Calendar" "Contacts" "Dashboard" "Dock" "Finder" \
   killall "$app" > /dev/null 2>&1
 done
 
-printf "Done. Note that some of these changes require a logout/restart to take effect."
+printf "\033[1;37mDone. Note that some of these changes require a logout/restart to take effect.\033[m"
