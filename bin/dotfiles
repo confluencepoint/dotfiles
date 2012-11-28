@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# dotfiles installation script
+
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 DOTFILES_TARBALL_PATH="https://github.com/kevva/dotfiles/tarball/master"
 DOTFILES_GIT_REMOTE="https://github.com/kevva/dotfiles"
 
-# Download and extract the repository to the home directory if the directory is missing
+# Download and extract the repository to the home directory if the directory
+# is missing
 if [[ ! -d ${DOTFILES_DIRECTORY} ]] ; then
   printf "\n\033[1;37mDownloading dotfiles...\033[m\n"
   # Make .dotfiles directory in home
@@ -101,12 +104,12 @@ else
 fi
 
 link() {
-  # Force create/replace the symlink.
+  # Force create/replace the symlink
   ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
 mirrorfiles() {
-  # Copy `.gitconfig`.
+  # Copy `.gitconfig`
   # Any global git commands in `~/.bash_profile.local` will be written to
   # `.gitconfig`. This prevents them being committed to the repository.
   cp -av ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
