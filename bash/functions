@@ -15,7 +15,7 @@ function f() {
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
   # Get Python version
-  local version=`python -c $'import sys;\nprint (sys.version_info[0])'`
+  local version=$(python -c $'import sys;\nprint (sys.version_info[0])')
 
   # Get port (if specified)
   local port="${1:-8000}"
