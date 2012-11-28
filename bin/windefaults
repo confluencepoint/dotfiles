@@ -139,4 +139,4 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Ex
 # Tell user to restart for the changes to take effect
 #
 
-printf "\033[1;37mDone. Note that some of these changes require a logout/restart to take effect.\033[m"
+printf "\033[1;37mDone. Note that some of these changes require a logout/restart to take effect.\033[m\n"
