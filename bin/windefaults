@@ -6,6 +6,10 @@
 # General UI/UX
 #
 
+# Enable ClearType
+reg add "HKCU\Control Panel\Desktop" -v "FontSmoothing" -t REG_SZ -d "2" -f
+reg add "HKCU\Control Panel\Desktop" -v "FontSmoothingType" -t REG_DWORD -d "00000002" -f
+
 # Disable hover delay on taskbar previews
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -v "ExtendedUIHoverTime" -t REG_DWORD -d "00000001" -f
 
