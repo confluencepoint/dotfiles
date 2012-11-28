@@ -82,6 +82,14 @@ Custom OS X settings can be applied by running the following command:
 $ osxdefaults
 ```
 
+### Custom Windows defaults
+
+Custom Windows settings can be applied by running the following command:
+
+```bash
+$ windefaults
+```
+
 ## Adding local and private configurations
 
 You can create a `~/.bash_profile.local` file to add private and custom
