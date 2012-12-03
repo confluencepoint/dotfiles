@@ -14,7 +14,7 @@
 # https://github.com/stevenharman/console2-solarized
 
 # Example:
-# kevva@host: ~/.dotfiles on master[!?]
+# kevva at host in ~/.dotfiles on master[!?]
 # $
 
 # Check that terminfo exists before changing TERM var to xterm-256color
@@ -126,7 +126,7 @@ function prompt_git() {
     git_info="$git_info[$git_state]"
   fi
 
-  printf "${style_chars}on ${style_branch}${git_info}"
+  printf "${SOLAR_GREY}on ${style_branch}${git_info}"
 }
 
 # Build the prompt
