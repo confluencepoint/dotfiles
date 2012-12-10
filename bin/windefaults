@@ -134,9 +134,3 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" -v "WaitToKillServ
 
 # Disable Low Disk Space checks
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -v "NoLowDiskSpaceChecks" -t REG_DWORD -d "00000001" -f
-
-#
-# Tell user to restart for the changes to take effect
-#
-
-printf "\033[1;37mDone. Note that some of these changes require a logout/restart to take effect.\033[m\n"

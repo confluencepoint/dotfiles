@@ -139,3 +139,26 @@ else
   printf "Aborting...\n"
   exit 1
 fi
+
+# Verify that the user want to update their system defaults
+if os_is 'darwin'; then
+  printf "\n"
+  e_warning "Warning: This step may modify your OS X system defaults."
+  read -p "Continue? (y/n) " -n 1
+  printf "\n"
+
+  if [[ $REPLY == y ]]; then
+    bash ./bin/osxdefaults
+    e_success "OS X settings updated! You may need to restart."
+  fi
+elif os_is 'msys'; then
+  printf "\n"
+  e_warning "Warning: This step may modify your Windows system defaults."
+  read -p "Continue? (y/n) " -n 1
+  printf "\n"
+
+  if [[ $REPLY == y ]]; then
+    bash ./bin/windefaults
+    e_success "Windows settings updated! You may need to restart."
+  fi
+fi

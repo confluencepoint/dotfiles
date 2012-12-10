@@ -74,22 +74,6 @@ Node packages:
 * [bower](http://twitter.github.com/bower/)
 * [grunt](http://gruntjs.com/)
 
-### Custom OS X defaults
-
-Custom OS X settings can be applied by running the following command:
-
-```bash
-$ osxdefaults
-```
-
-### Custom Windows defaults
-
-Custom Windows settings can be applied by running the following command:
-
-```bash
-$ windefaults
-```
-
 ## Adding local and private configurations
 
 You can create a `~/.bash_profile.local` file to add private and custom
