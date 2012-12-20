@@ -70,8 +70,8 @@ if [[ $OSTYPE == darwin* ]]; then
   alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
   # Show/hide hidden files in Finder
-  alias showdotfiles="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
-  alias hidedotfiles="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
+  alias showdotfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+  alias hidedotfiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
   # Hide/show all desktop icons (useful when presenting)
   alias showdeskicons="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
