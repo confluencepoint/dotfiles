@@ -13,9 +13,6 @@ export HISTCONTROL=ignoredups
 # Make some commands not show up in history
 export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
 
-# Set title to current path
-export PROMPT_COMMAND='printf "\033]0;${PWD/$HOME/~}\007"'
-
 if [[ $OSTYPE == darwin* ]]; then
   # OS X
   declare -a bins=(

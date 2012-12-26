@@ -130,7 +130,8 @@ function prompt_git() {
 }
 
 # Build the prompt
-PS1="\n" # Newline
+PS1="\[\033]0;\w\007\]" # Terminal title
+PS1+="\n" # Newline
 PS1+="${style_user}\u " # Username
 PS1+="${style_chars}at " # @
 PS1+="${style_host}\h " # Host
