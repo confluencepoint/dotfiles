@@ -12,6 +12,11 @@ function f() {
   find . -name "$1"
 }
 
+# Show dirs in $PATH
+function path() {
+  echo $PATH | tr ":" "\n" | sort
+}
+
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
   # Get Python version
