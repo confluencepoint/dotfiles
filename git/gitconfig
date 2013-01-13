@@ -20,8 +20,8 @@
   # Show status in short format
   s = status -s
 
-  # Switch to a branch
-  co = checkout
+  # Switch to a branch, creating it if necessary
+  go = checkout -B
 
   # Show the diff between the latest commit and the current state
   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
