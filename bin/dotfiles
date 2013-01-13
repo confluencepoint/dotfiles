@@ -133,13 +133,9 @@ mirrorfiles() {
   e_success "Dotfiles update complete!"
 }
 
-# Verify that the user wants to proceed before potentially overwriting files
-printf "\n"
-e_warning "Warning: This may overwrite your existing dotfiles."
-read -p "Continue? (y/n) " -n 1
-printf "\n"
-
-if [[ $REPLY == y ]] ; then
+# Ask before potentially overwriting files
+e_ask "Warning: This step may overwrite your existing dotfiles."
+if is_confirmed; then
   mirrorfiles
   source ${HOME}/.bash_profile
 else
@@ -147,25 +143,24 @@ else
   exit 1
 fi
 
-# Verify that the user want to update their system defaults
+# Ask before potentially overwriting OS X defaults
 if os_is 'darwin'; then
-  printf "\n"
-  e_warning "Warning: This step may modify your OS X system defaults."
-  read -p "Continue? (y/n) " -n 1
-  printf "\n"
-
-  if [[ $REPLY == y ]]; then
+  e_ask "Warning: This step may modify your OS X system defaults."
+  if is_confirmed; then
     bash ./bin/osxdefaults
     e_success "OS X settings updated! You may need to restart."
+  else
+    printf "Skipped OS X settings update.\n"
   fi
-elif os_is 'msys'; then
-  printf "\n"
-  e_warning "Warning: This step may modify your Windows system defaults."
-  read -p "Continue? (y/n) " -n 1
-  printf "\n"
+fi
 
-  if [[ $REPLY == y ]]; then
+# Ask before potentially overwriting Windows defaults
+if os_is 'msys'; then
+  e_ask "Warning: This step may modify your Windows system defaults."
+  if is_confirmed; then
     bash ./bin/windefaults
     e_success "Windows settings updated! You may need to restart."
+  else
+    printf "Skipped Windows settings update.\n"
   fi
 fi
