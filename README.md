@@ -38,8 +38,8 @@ Options:
 
 <table>
   <tr>
-    <td><code>-h</code>, <code>--help</code></td>
-    <td>Help</td>
+    <td><code>-?</code>, <code>-h</code>, <code>--help</code></td>
+    <td>Show help message</td>
   </tr>
   <tr>
     <td><code>--no-packages</code></td>
