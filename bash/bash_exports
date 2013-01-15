@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# exports
+# bash_exports
 
 # Don't clear the screen after quitting a manual page
 export MANPAGER="less -X"

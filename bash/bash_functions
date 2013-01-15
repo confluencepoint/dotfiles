@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# functions
+# bash_functions
 
 # Create a new directory and enter it
 md() {
