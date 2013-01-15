@@ -62,6 +62,10 @@
   # Undo a `git commit`
   undocommit = reset --hard HEAD^
 
+[apply]
+  # Detect whitespace errors when applying a patch
+  whitespace = fix
+
 [color]
   # color opts: normal, black, red, green, yellow, blue, magenta, cyan, or white
   ui = auto
