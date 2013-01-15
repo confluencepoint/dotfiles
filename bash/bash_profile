@@ -3,11 +3,12 @@
 # bash_profile
 
 declare -a files=(
-  "$HOME/.bash_profile.local" # Local and private settings
-  "$HOME/.dotfiles/bash/bash_exports" # Exports
+  "$HOME/.dotfiles/bash/bash_config" # Configuration
   "$HOME/.dotfiles/bash/bash_aliases" # Aliases
   "$HOME/.dotfiles/bash/bash_functions" # Functions
   "$HOME/.dotfiles/bash/bash_prompt" # Custom Bash prompt
+  "$HOME/.bash_profile.local" # Local and private settings
+  "$HOME/.dotfiles/bash/bash_path" # Path modification
 )
 
 # If these files are readable, source them
@@ -29,15 +30,3 @@ if [[ $OSTYPE == darwin* ]]; then
     source $bash_completion_path
   fi
 fi
-
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
-
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend
-
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell
-
-# Ignore case while completing
-set completion-ignore-case on
