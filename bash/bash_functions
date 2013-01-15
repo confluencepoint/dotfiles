@@ -3,17 +3,17 @@
 # functions
 
 # Create a new directory and enter it
-function md() {
+md() {
   mkdir -p "$@" && cd "$@"
 }
 
 # Find shorthand
-function f() {
+f() {
   find . -name "$1"
 }
 
 # Determine size of a file or total size of a directory
-function fs() {
+fs() {
   if du -b /dev/null > /dev/null 2>&1; then
     local arg=-sbh
   else
@@ -27,12 +27,12 @@ function fs() {
 }
 
 # Show dirs in $PATH
-function path() {
+path() {
   echo $PATH | tr ":" "\n" | sort
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
-function server() {
+pyserver() {
   # Get Python version
   local version=$(python -c $'import sys;\nprint (sys.version_info[0])')
 
@@ -56,7 +56,7 @@ function server() {
 }
 
 # Compare original and gzipped file size
-function gz() {
+gz() {
   local origsize=$(wc -c < "$1")
   local gzipsize=$(gzip -c "$1" | wc -c)
   local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l)
@@ -65,7 +65,7 @@ function gz() {
 }
 
 # Take this repo and copy it to somewhere else minus the .git stuff.
-function gitexport(){
+gitexport(){
   mkdir -p "$1"
   git archive master | tar -x -C "$1"
 }
