@@ -2,11 +2,6 @@
 
 # bash_functions
 
-# Create a new directory and enter it
-md() {
-  mkdir -p "$@" && cd "$@"
-}
-
 # Find shorthand
 f() {
   find . -name "$1"
@@ -24,6 +19,26 @@ fs() {
   else
     du $arg .[^.]* *
   fi
+}
+
+# Take this repo and copy it to somewhere else minus the .git stuff.
+gitexport(){
+  mkdir -p "$1"
+  git archive master | tar -x -C "$1"
+}
+
+# Compare original and gzipped file size
+gz() {
+  local origsize=$(wc -c < "$1")
+  local gzipsize=$(gzip -c "$1" | wc -c)
+  local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l)
+  printf "orig: %d bytes\n" "$origsize"
+  printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio"
+}
+
+# Create a new directory and enter it
+md() {
+  mkdir -p "$@" && cd "$@"
 }
 
 # Show dirs in $PATH
@@ -53,19 +68,4 @@ pyserver() {
   elif [[ $version == 3 ]]; then
     python -m http.server "$port"
   fi
-}
-
-# Compare original and gzipped file size
-gz() {
-  local origsize=$(wc -c < "$1")
-  local gzipsize=$(gzip -c "$1" | wc -c)
-  local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l)
-  printf "orig: %d bytes\n" "$origsize"
-  printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio"
-}
-
-# Take this repo and copy it to somewhere else minus the .git stuff.
-gitexport(){
-  mkdir -p "$1"
-  git archive master | tar -x -C "$1"
 }
