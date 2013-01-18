@@ -22,7 +22,7 @@ fs() {
 }
 
 # Take this repo and copy it to somewhere else minus the .git stuff.
-gitexport(){
+ge() {
   mkdir -p "$1"
   git archive master | tar -x -C "$1"
 }
@@ -47,7 +47,7 @@ path() {
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
-pyserver() {
+pysrv() {
   # Get Python version
   local version=$(python -c $'import sys;\nprint (sys.version_info[0])')
 
