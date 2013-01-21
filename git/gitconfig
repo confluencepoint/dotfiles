@@ -21,7 +21,7 @@
   s = status -s
 
   # Switch to a branch, creating it if necessary
-  go = checkout -B
+  go = !"bash -c 'if $(git show-ref --verify refs/heads/$0 &> /dev/null); then\n git checkout $0\n else\n git checkout -b $0\n fi'"
 
   # Show the diff between the latest commit and the current state
   d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
