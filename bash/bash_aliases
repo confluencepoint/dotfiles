@@ -68,9 +68,6 @@ if [[ $OSTYPE == darwin* ]]; then
   # Flush DNS cache
   alias flushdns="dscacheutil -flushcache"
 
-  # Recursively delete `.DS_Store` files
-  alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-
   # Show/hide hidden files in Finder
   alias showdotfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
   alias hidedotfiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
