@@ -3,18 +3,18 @@
 # bash_profile
 
 declare -a files=(
-  "$HOME/.dotfiles/bash/bash_config" # Configuration
-  "$HOME/.dotfiles/bash/bash_aliases" # Aliases
-  "$HOME/.dotfiles/bash/bash_functions" # Functions
-  "$HOME/.dotfiles/bash/bash_prompt" # Custom Bash prompt
-  "$HOME/.bash_profile.local" # Local and private settings
-  "$HOME/.dotfiles/bash/bash_path" # Path modification
+  $HOME/.dotfiles/bash/bash_config # Configuration
+  $HOME/.dotfiles/bash/bash_aliases # Aliases
+  $HOME/.dotfiles/bash/functions/* # Functions
+  $HOME/.dotfiles/bash/bash_prompt # Custom Bash prompt
+  $HOME/.bash_profile.local # Local and private settings
+  $HOME/.dotfiles/bash/bash_path # Path modification
 )
 
 # If these files are readable, source them
 for index in ${!files[*]}
 do
-  if [ -r ${files[$index]} ]; then
+  if [[ -r ${files[$index]} ]]; then
     source ${files[$index]}
   fi
 done

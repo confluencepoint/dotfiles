@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Start an HTTP server from a directory, optionally specifying the port
+pyserver() {
+  # Get Python version
+  local version=$(python -c $'import sys;\nprint (sys.version_info[0])')
+
+  # Get port (if specified)
+  local port="${1:-8000}"
+
+  # Open in the browser
+  if [[ $OSTYPE == darwin* ]]; then
+    open "http://localhost:${port}/"
+  elif [[ $OSTYPE == msys* ]]; then
+    start "http://localhost:${port}/"
+  fi
+
+  if [[ $version == 2 ]]; then
+    # Set the default Content-Type to `text/plain` instead of
+    # `application/octet-stream`.
+    python -c $'import SimpleHTTPServer;\nSimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map[""] = "text/plain";\nSimpleHTTPServer.test();' "$port"
+  elif [[ $version == 3 ]]; then
+    python -m http.server "$port"
+  fi
+}
