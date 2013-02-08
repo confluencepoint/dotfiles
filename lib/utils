@@ -32,7 +32,7 @@ e_error() {
   if os_is 'darwin'; then
     printf "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
   else
-    printf "\033[0;31mx %s\033[m\n" "$@"
+    printf "\033[0;31m✖ %s\033[m\n" "$@"
   fi
 }
 
