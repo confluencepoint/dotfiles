@@ -133,7 +133,7 @@ mirrorfiles() {
 }
 
 # Ask before potentially overwriting files
-e_ask "Warning: This step may overwrite your existing dotfiles."
+seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 if is_confirmed; then
   mirrorfiles
   source ${HOME}/.bash_profile
@@ -144,7 +144,7 @@ fi
 
 # Ask before potentially overwriting OS X defaults
 if os_is 'darwin'; then
-  e_ask "Warning: This step may modify your OS X system defaults."
+  seek_confirmation "Warning: This step may modify your OS X system defaults."
   if is_confirmed; then
     bash ./bin/osxdefaults
     e_success "OS X settings updated! You may need to restart."
@@ -155,7 +155,7 @@ fi
 
 # Ask before potentially overwriting Windows defaults
 if os_is 'msys'; then
-  e_ask "Warning: This step may modify your Windows system defaults."
+  seek_confirmation "Warning: This step may modify your Windows system defaults."
   if is_confirmed; then
     bash ./bin/windefaults
     e_success "Windows settings updated! You may need to restart."
