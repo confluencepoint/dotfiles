@@ -3,7 +3,6 @@
 # dotfiles installation script
 
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
-DOTFILES_TARBALL_PATH="https://github.com/kevva/dotfiles/tarball/master"
 DOTFILES_GIT_REMOTE="https://github.com/kevva/dotfiles"
 
 # Download and extract the repository to the home directory
@@ -12,7 +11,7 @@ if [[ ! -d ${DOTFILES_DIRECTORY} ]] ; then
   # Make .dotfiles directory in home
   mkdir ${DOTFILES_DIRECTORY}
   # Use curl to get the tarball of the github repository
-  curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOTFILES_TARBALL_PATH}
+  curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOTFILES_GIT_REMOTE}/tarball/master
   # Extract to our .dotfiles directory
   tar -zxvf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${DOTFILES_DIRECTORY}
   # Remove the tarball
