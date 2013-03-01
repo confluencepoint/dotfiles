@@ -1,48 +1,24 @@
 #!/bin/bash
-
-# Test which OS the user runs
-# $1 - cmd to test
-os_is() {
-  if [[ "$OSTYPE" == $1* ]]; then
-    return 0
-  fi
-  return 1
-}
+# Common utilities used by the dotfiles installation script
 
 # Header logging
 e_header() {
-  if os_is 'darwin'; then
-    printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
-  else
-    printf "\n\033[1;37m%s\033[m\n" "$@"
-  fi
+  printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
 }
 
 # Success logging
 e_success() {
-  if os_is 'darwin'; then
-    printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
-  else
-    printf "\033[0;32m✓ %s\033[m\n" "$@"
-  fi
+  printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
 }
 
 # Error logging
 e_error() {
-  if os_is 'darwin'; then
-    printf "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
-  else
-    printf "\033[0;31m✖ %s\033[m\n" "$@"
-  fi
+  printf "$(tput setaf 1)x %s$(tput sgr0)\n" "$@"
 }
 
 # Warning logging
 e_warning() {
-  if os_is 'darwin'; then
-    printf "$(tput setaf 136)! %s$(tput sgr0)\n" "$@"
-  else
-    printf "\033[0;33m! %s\033[m\n" "$@"
-  fi
+  printf "$(tput setaf 136)! %s$(tput sgr0)\n" "$@"
 }
 
 # Ask for confirmation before proceeding
@@ -55,7 +31,7 @@ seek_confirmation() {
 
 # Test whether the result of an 'ask' is a confirmation
 is_confirmed() {
-  if [[ "$REPLY" == y ]]; then
+  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     return 0
   fi
   return 1
@@ -69,7 +45,7 @@ is_git_repo() {
 # Test whether a command exists
 # $1 - cmd to test
 type_exists() {
-  if [[ $(type -P $1) ]]; then
+  if [ $(type -P $1) ]; then
     return 0
   fi
   return 1
@@ -79,10 +55,10 @@ type_exists() {
 # $1 - formula name (may include options)
 formula_exists() {
   if $(brew list $1 >/dev/null); then
-    printf %s "already installed.\n" "$1"
+    printf "%s already installed.\n" "$1"
     return 0
   fi
 
   e_warning "Missing formula: $1"
-  return 0
+  return 1s
 }

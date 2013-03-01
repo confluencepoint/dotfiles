@@ -1,0 +1,27 @@
+#!/bin/bash
+# List additional software to install
+
+run_list() {
+cat <<EOT
+dotfiles - Kevin Martensson - http://kevinmartensson.com/
+
+Additional software to install
+
+Browsers:
+  Firefox
+  Google Chrome
+  Opera
+
+Development:
+  Filezilla
+  iTerm 2
+
+Other:
+  Alfred
+  Divvy
+  Dropbox
+  Skype
+  uTorrent
+  VLC
+EOT
+}

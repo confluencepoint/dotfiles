@@ -1,4 +1,5 @@
 #!/bin/bash
+# Homebrew formulae installation
 
 run_brew() {
   # Check for Homebrew

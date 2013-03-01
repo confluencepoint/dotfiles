@@ -1,16 +1,17 @@
 #!/bin/bash
+# Help text
 
 run_help() {
 cat <<EOT
-
-Windows and OS X dotfiles - Kevin Martensson - http://kevinmartensson.com/
+dotfiles - Kevin Martensson - http://kevinmartensson.com/
 
 Usage: $(basename "$0") [options]
 
 Options:
-  --no-packages   Suppress package updates
-  --no-sync       Suppress pulling from the remote repository
-  -?, -h, --help  Show this message
+  -h,  --help          Print this help text
+  -l,  --list          Print a list of additional software to install
+  -np, --no-packages   Suppress package updates
+  -ns, --no-sync       Suppress pulling from the remote repository
 
 Documentation can be found at https://github.com/kevva/dotfiles/
 
