@@ -60,5 +60,5 @@ formula_exists() {
   fi
 
   e_warning "Missing formula: $1"
-  return 1s
+  return 1
 }
