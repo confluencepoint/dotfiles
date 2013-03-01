@@ -127,15 +127,17 @@ mirrorfiles() {
   e_success "Dotfiles update complete!"
 }
 
-# Ask before potentially overwriting files
-seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+if [[ ! $no_sync ]]; then
+  # Ask before potentially overwriting files
+  seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
-if is_confirmed; then
-  mirrorfiles
-  source ${HOME}/.bash_profile
-else
-  printf "Aborting...\n"
-  exit 1
+  if is_confirmed; then
+    mirrorfiles
+    source ${HOME}/.bash_profile
+  else
+    printf "Aborting...\n"
+    exit 1
+  fi
 fi
 
 # Ask before potentially overwriting OS X defaults
