@@ -24,6 +24,7 @@ source ./lib/list
 source ./lib/utils
 source ./lib/brew
 source ./lib/npm
+source ./lib/subl
 
 # Help text
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
@@ -137,6 +138,17 @@ if [[ ! $no_sync ]]; then
   else
     printf "Aborting...\n"
     exit 1
+  fi
+fi
+
+if [[ ! $no_sync ]]; then
+  # Ask before potentially overwriting Sublime Text 2 preferences
+  seek_confirmation "Warning: This step may overwrite your existing Sublime Text 2 preferences."
+
+  if is_confirmed; then
+    run_subl
+  else
+    printf "Skipped installing Sublime Text 2 preferences.\n"
   fi
 fi
 

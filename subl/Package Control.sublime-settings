@@ -1,0 +1,13 @@
+{
+  "installed_packages":
+  [
+    "GitGutter",
+    "JSHint",
+    "Package Control",
+    "SCSS",
+    "SublimeCodeIntel",
+    "SublimeLinter",
+    "Tag",
+    "Theme - Soda"
+  ]
+}
