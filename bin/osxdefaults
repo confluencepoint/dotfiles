@@ -159,6 +159,13 @@ defaults write com.apple.iTunes disablePingSidebar -bool true
 # iTunes: disable all the other Ping stuff
 defaults write com.apple.iTunes disablePing -bool true
 
+# Google Chrome
+# ------------------------------------------------------------------------------
+
+# Allow installing user scripts via GitHub
+defaults write com.google.Chrome ExtensionInstallSources -array "https://*.github.com/*"
+defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://*.github.com/*"
+
 # Misc
 # ------------------------------------------------------------------------------
 
