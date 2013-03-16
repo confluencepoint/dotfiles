@@ -8,11 +8,17 @@
 # Disable Menu bar transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
+# Hide the Time Machine and Volume icons in the Menu bar
+defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu" "/System/Library/CoreServices/Menu Extras/Clock.menu"
+
 # Enable snap-to-grid for desktop icons
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+# Disable opening and closing window animations
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -26,22 +32,34 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 # Disable Resume system-wide
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
-# Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
-
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# Disable Notification Center and remove the menu bar icon
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input
+# ------------------------------------------------------------------------------
 
 # Trackpad: swipe between pages with three fingers
 defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 1
 
-# Dock
+# Mouse: disable “natural” (Lion-style) scrolling
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+# Keyboard: set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 0
+
+# Keyboard: disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Dock and Dashboard
 # ------------------------------------------------------------------------------
+
+# Dock: automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
 
 # Dock: enable the 2D Dock
 defaults write com.apple.dock no-glass -bool true
@@ -66,6 +84,18 @@ defaults write com.apple.dock mineffect scale
 
 # Dock: speed up Mission Control animations
 defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# Dock: remove the auto-hiding Dock delay
+defaults write com.apple.dock autohide-delay -float 0
+
+# Dock: remove the animation when hiding/showing the Dock
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Dashboard: don’t show Dashboard as a Space
+defaults write com.apple.dock dashboard-in-overlay -bool true
+
+# Dashboard: disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -bool true
 
 # Finder
 # ------------------------------------------------------------------------------
@@ -162,9 +192,9 @@ defaults write com.apple.iTunes disablePing -bool true
 # Google Chrome
 # ------------------------------------------------------------------------------
 
-# Allow installing user scripts via GitHub
-defaults write com.google.Chrome ExtensionInstallSources -array "https://*.github.com/*"
-defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://*.github.com/*"
+# Allow installing user scripts via GitHub and UserScripts
+defaults write com.google.Chrome ExtensionInstallSources -array "https://*.github.com/*" "http://userscripts.org/*"
+defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://*.github.com/*" "http://userscripts.org/*"
 
 # Misc
 # ------------------------------------------------------------------------------
