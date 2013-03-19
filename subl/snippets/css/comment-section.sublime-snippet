@@ -1,0 +1,9 @@
+<snippet>
+  <content><![CDATA[
+/* $1
+ * ========================================================================== */
+]]></content>
+  <tabTrigger>cs</tabTrigger>
+  <scope>source.css</scope>
+  <description>Section comment</description>
+</snippet>
