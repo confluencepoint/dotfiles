@@ -25,6 +25,7 @@
     80
   ],
   "scroll_speed": 0,
+  "show_full_path": true,
   "tab_size": 2,
   "theme": "Soda Light.sublime-theme",
   "translate_tabs_to_spaces": true,
