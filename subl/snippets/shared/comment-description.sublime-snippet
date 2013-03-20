@@ -5,6 +5,6 @@
  */
 ]]></content>
   <tabTrigger>cd</tabTrigger>
-  <scope>source.css</scope>
+  <scope>source.css, source.js</scope>
   <description>Description comment</description>
 </snippet>

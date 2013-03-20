@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-@import "$1";
-]]></content>
-  <tabTrigger>import</tabTrigger>
-  <scope>source.css</scope>
-  <description>Import file</description>
-</snippet>
