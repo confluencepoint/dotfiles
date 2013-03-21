@@ -2,7 +2,7 @@
 # Install Sublime Text preferences
 
 run_subl() {
-  SUBLIME_DOTFILES="${HOME}/.dotfiles/subl"
+  SUBLIME_DOTFILES="${DOTFILES_DIRECTORY}/subl"
   SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 2/Packages"
   SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
 
