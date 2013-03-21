@@ -35,8 +35,8 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
-# Disable Notification Center and remove the menu bar icon
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+# Set sidebar icon size to medium
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input
 # ------------------------------------------------------------------------------
@@ -156,8 +156,14 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
+# Screen: disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
 # Screen: save screenshots to the desktop
 defaults write com.apple.screencapture location -string "$HOME/Desktop"
+
+# Screen: save screenshots in PNG format
+defaults write com.apple.screencapture type -string "png"
 
 # Screen: disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
