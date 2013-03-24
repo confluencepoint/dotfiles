@@ -33,6 +33,9 @@
   # Pull in remote changes for the current repository and all its submodules
   p = !"git pull; git submodule foreach git pull origin master"
 
+  # Push to remote
+  po = !bash -c 'git push origin ${1-master}' -
+
   # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
 
