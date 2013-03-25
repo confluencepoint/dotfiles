@@ -3,7 +3,7 @@
 
 run_subl() {
   SUBLIME_DOTFILES="${DOTFILES_DIRECTORY}/subl"
-  SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 3/Packages"
+  SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 2/Packages"
   SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
 
   # If the User directory exists, remove it
@@ -14,5 +14,5 @@ run_subl() {
   # Create symlink
   ln -s "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
 
-  [[ $? ]] && e_success "Sublime Text 3 settings updated!"
+  [[ $? ]] && e_success "Sublime Text 2 settings updated!"
 }
