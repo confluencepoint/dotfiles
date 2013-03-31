@@ -14,5 +14,5 @@ run_subl() {
   # Create symlink
   ln -s "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
 
-  [[ $? ]] && e_success "Sublime Text 2 settings updated!"
+  [[ $? ]] && log_success "Sublime Text 2 settings updated!"
 }

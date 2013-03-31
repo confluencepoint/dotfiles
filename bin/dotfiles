@@ -44,13 +44,13 @@ do
   case $opt in
     -np|--no-packages) no_packages=true ;;
     -ns|--no-sync) no_sync=true ;;
-    -*|--*) e_warning "Warning: invalid option $opt" ;;
+    -*|--*) log_warning "Warning: invalid option $opt" ;;
   esac
 done
 
 # Before relying on Homebrew, check that packages can be compiled
 if ! type_exists 'gcc'; then
-  e_error "The XCode Command Line Tools must be installed first."
+  log_error "The XCode Command Line Tools must be installed first."
   printf "  Download them from: https://developer.apple.com/downloads\n"
   printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
   exit 1
@@ -58,21 +58,21 @@ fi
 
 # Check for Homebrew
 if ! type_exists 'brew'; then
-  e_header "Installing Homebrew..."
+  log_header "Installing Homebrew..."
   ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
 fi
 
 # Check for git
 if ! type_exists 'git'; then
-  e_header "Updating Homebrew..."
+  log_header "Updating Homebrew..."
   brew update
-  e_header "Installing Git..."
+  log_header "Installing Git..."
   brew install git
 fi
 
 # Initialize the git repository if it's missing
 if ! is_git_repo; then
-  e_header "Initializing git repository..."
+  log_header "Initializing git repository..."
   git init
   git remote add origin ${DOTFILES_GIT_REMOTE}
   git fetch origin master
@@ -87,7 +87,7 @@ fi
 if [[ $no_sync ]]; then
   printf "Skipped dotfiles sync.\n"
 else
-  e_header "Syncing dotfiles..."
+  log_header "Syncing dotfiles..."
   # Pull down the latest changes
   git pull --rebase origin master
   # Update submodules
@@ -125,7 +125,7 @@ mirrorfiles() {
   link "git/gitattributes"  ".gitattributes"
   link "git/gitignore"      ".gitignore"
 
-  e_success "Dotfiles update complete!"
+  log_success "Dotfiles update complete!"
 }
 
 if [[ ! $no_sync ]]; then
@@ -157,7 +157,7 @@ seek_confirmation "Warning: This step may modify your OS X system defaults."
 
 if is_confirmed; then
   bash ./bin/osxdefaults
-  e_success "OS X settings updated! You may need to restart."
+  log_success "OS X settings updated! You may need to restart."
 else
   printf "Skipped OS X settings update.\n"
 fi
