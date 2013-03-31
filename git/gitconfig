@@ -1,73 +1,73 @@
 [alias]
-  # Fetch a repository ($1) and checkout its ref ($2) HEAD
-  br = !bash -c 'git fetch "$1" "$2" && git checkout FETCH_HEAD' -
+    # Fetch a repository ($1) and checkout its ref ($2) HEAD
+    br = !bash -c 'git fetch "$1" "$2" && git checkout FETCH_HEAD' -
 
-  # Clone a repository including all submodules
-  c = clone --recursive
+    # Clone a repository including all submodules
+    c = clone --recursive
 
-  # Commit all changes
-  ca = !git add -A && git commit -av
+    # Commit all changes
+    ca = !git add -A && git commit -av
 
-  # Show the diff between the latest commit and the current state
-  d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+    # Show the diff between the latest commit and the current state
+    d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
 
-  # Shows the diff between the state `$number` revisions ago and the
-  # current state
-  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+    # Shows the diff between the state `$number` revisions ago and the
+    # current state
+    di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
-  # Switch to a branch, creating it if necessary
-  go = !"bash -c 'if $(git show-ref --verify refs/heads/$0 &> /dev/null); then\ngit checkout $0\n else\n git checkout -b $0\n fi'"
+    # Switch to a branch, creating it if necessary
+    go = !"bash -c 'if $(git show-ref --verify refs/heads/$0 &> /dev/null); then\ngit checkout $0\n else\n git checkout -b $0\n fi'"
 
-  # Custom graph log (append any tree-ish)
-  gr = log --pretty=nice --date-order --graph
+    # Custom graph log (append any tree-ish)
+    gr = log --pretty=nice --date-order --graph
 
-  # Custom graph log for all branches
-  gra = log --pretty=nice --date-order --graph --all
+    # Custom graph log for all branches
+    gra = log --pretty=nice --date-order --graph --all
 
-  # Diffstat log
-  l = log --stat
+    # Diffstat log
+    l = log --stat
 
-  # Short format diffstat log
-  ls = log --stat --format=oneline --abbrev-commit
+    # Short format diffstat log
+    ls = log --stat --format=oneline --abbrev-commit
 
-  # Pull in remote changes for the current repository and all its submodules
-  p = !"git pull; git submodule foreach git pull origin master"
+    # Pull in remote changes for the current repository and all its submodules
+    p = !"git pull; git submodule foreach git pull origin master"
 
-  # Push to remote
-  po = !bash -c 'git push origin ${1-master}' -
+    # Push to remote
+    po = !bash -c 'git push origin ${1-master}' -
 
-  # Interactive rebase with the given number of latest commits
-  reb = "!r() { git rebase -i HEAD~$1; }; r"
+    # Interactive rebase with the given number of latest commits
+    reb = "!r() { git rebase -i HEAD~$1; }; r"
 
-  # Show detailed information about remote origin
-  rso = remote show origin
+    # Show detailed information about remote origin
+    rso = remote show origin
 
-  # View the current working tree status using the short format
-  s = status -s
+    # View the current working tree status using the short format
+    s = status -s
 
-  # Display the number of commits per author in numerical order
-  who = shortlog -sn --
+    # Display the number of commits per author in numerical order
+    who = shortlog -sn --
 
-  # Update current branch
-  up = !bash -c 'git fetch origin && git rebase -p origin/${1-master}' -
+    # Update current branch
+    up = !bash -c 'git fetch origin && git rebase -p origin/${1-master}' -
 
 [color]
-  ui = auto
-  interactive = auto
+    ui = auto
+    interactive = auto
 
 [core]
-  # Use custom `.gitignore` and `.gitattributes`
-  excludesfile = ~/.gitignore
-  attributesfile = ~/.gitattributes
+    # Use custom `.gitignore` and `.gitattributes`
+    excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
 
 [diff]
-  tool = mvimdiff
+    tool = mvimdiff
 
 [difftool]
-  prompt = false
+    prompt = false
 
 [pretty]
-  nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
+    nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
 
 [push]
-  default = simple
+    default = simple

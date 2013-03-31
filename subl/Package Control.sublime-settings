@@ -1,18 +1,18 @@
 {
-  "installed_packages":
-  [
-    "AutoFileName",
-    "EditorConfig",
-    "Focus",
-    "GitGutter",
-    "JSHint",
-    "Nodejs",
-    "Package Control",
-    "SCSS",
-    "SublimeCodeIntel",
-    "SublimeLinter",
-    "SublimeRope",
-    "Tag",
-    "Theme - Soda"
-  ]
+    "installed_packages":
+    [
+        "AutoFileName",
+        "EditorConfig",
+        "Focus",
+        "GitGutter",
+        "JSHint",
+        "Nodejs",
+        "Package Control",
+        "SCSS",
+        "SublimeCodeIntel",
+        "SublimeLinter",
+        "SublimeRope",
+        "Tag",
+        "Theme - Soda"
+    ]
 }

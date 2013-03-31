@@ -1,10 +1,10 @@
 <snippet>
-  <content><![CDATA[
+    <content><![CDATA[
 /**
  * $1
  */
 ]]></content>
-  <tabTrigger>cd</tabTrigger>
-  <scope>source.css, source.js</scope>
-  <description>Description comment</description>
+    <tabTrigger>cd</tabTrigger>
+    <scope>source.css, source.js</scope>
+    <description>Description comment</description>
 </snippet>

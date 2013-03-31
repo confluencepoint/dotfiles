@@ -32,22 +32,22 @@ $ dotfiles
 Options:
 
 <table>
-  <tr>
-    <td><code>-h</code>, <code>--help</code></td>
-    <td>Help</td>
-  </tr>
-  <tr>
-    <td><code>-l</code>, <code>--list</code></td>
-    <td>List of additional applications to install</td>
-  </tr>
-  <tr>
-    <td><code>-np</code>, <code>--no-packages</code></td>
-    <td>Suppress package updates</td>
-  </tr>
-  <tr>
-    <td><code>-ns</code>, <code>--no-sync</code></td>
-    <td>Suppress pulling from the remote repository</td>
-  </tr>
+    <tr>
+        <td><code>-h</code>, <code>--help</code></td>
+        <td>Help</td>
+    </tr>
+    <tr>
+        <td><code>-l</code>, <code>--list</code></td>
+        <td>List of additional applications to install</td>
+    </tr>
+    <tr>
+        <td><code>-np</code>, <code>--no-packages</code></td>
+        <td>Suppress package updates</td>
+    </tr>
+    <tr>
+        <td><code>-ns</code>, <code>--no-sync</code></td>
+        <td>Suppress pulling from the remote repository</td>
+    </tr>
 </table>
 
 
@@ -105,22 +105,22 @@ HEAD is pointing to). The state of the working tree is reflected in the
 following way:
 
 <table>
-  <tr>
-    <td><code>+</code></td>
-    <td>Uncommitted changes in the index</td>
-  </tr>
-  <tr>
-    <td><code>!</code></td>
-    <td>Unstaged changes</td>
-  </tr>
-  <tr>
-    <td><code>?</code></td>
-    <td>Untracked files</td>
-  </tr>
-  <tr>
-    <td><code>$</code></td>
-    <td>Stashed files</td>
-  </tr>
+    <tr>
+        <td><code>+</code></td>
+        <td>Uncommitted changes in the index</td>
+    </tr>
+    <tr>
+        <td><code>!</code></td>
+        <td>Unstaged changes</td>
+    </tr>
+    <tr>
+        <td><code>?</code></td>
+        <td>Untracked files</td>
+    </tr>
+    <tr>
+        <td><code>$</code></td>
+        <td>Stashed files</td>
+    </tr>
 </table>
 
 Further details are in the `bash_prompt` file.

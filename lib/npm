@@ -2,21 +2,21 @@
 # npm package installation
 
 run_npm() {
-  # Check for npm
-  if type_exists 'npm'; then
-    log_header "Installing Node.js packages..."
+    # Check for npm
+    if type_exists 'npm'; then
+        log_header "Installing Node.js packages..."
 
-    # List of npm packages
-    local packages="bower grunt-cli jshint"
+        # List of npm packages
+        local packages="bower grunt-cli jshint"
 
-    # Install packages globally and quietly
-    npm install $packages --global --quiet
+        # Install packages globally and quietly
+        npm install $packages --global --quiet
 
-    [[ $? ]] && log_success "Done"
-  else
-    printf "\n"
-    log_error "Error: npm not found."
-    printf "Aborting...\n"
-    exit
-  fi
+        [[ $? ]] && log_success "Done"
+    else
+        printf "\n"
+        log_error "Error: npm not found."
+        printf "Aborting...\n"
+        exit
+    fi
 }

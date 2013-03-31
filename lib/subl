@@ -2,17 +2,17 @@
 # Install Sublime Text preferences
 
 run_subl() {
-  SUBLIME_DOTFILES="${DOTFILES_DIRECTORY}/subl"
-  SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 2/Packages"
-  SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
+    SUBLIME_DOTFILES="${DOTFILES_DIRECTORY}/subl"
+    SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 2/Packages"
+    SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
 
-  # If the User directory exists, remove it
-  if [[ -d "${SUBLIME_USER_DIRECTORY}" ]]; then
-    rm -rf "${SUBLIME_USER_DIRECTORY}"
-  fi
+    # If the User directory exists, remove it
+    if [[ -d "${SUBLIME_USER_DIRECTORY}" ]]; then
+        rm -rf "${SUBLIME_USER_DIRECTORY}"
+    fi
 
-  # Create symlink
-  ln -s "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
+    # Create symlink
+    ln -s "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
 
-  [[ $? ]] && log_success "Sublime Text 2 settings updated!"
+    [[ $? ]] && log_success "Sublime Text 2 settings updated!"
 }
