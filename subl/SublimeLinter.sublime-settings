@@ -8,7 +8,6 @@
         "es5": true,
         "esnext": true,
         "immed": true,
-        "indent": 4,
         "latedef": true,
         "newcap": true,
         "noarg": true,
