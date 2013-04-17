@@ -6,5 +6,5 @@
 ]]></content>
     <tabTrigger>cd</tabTrigger>
     <scope>source.scss, source.sass, source.less, source.styl</scope>
-    <description>Description comment</description>
+    <description>comment.description</description>
 </snippet>

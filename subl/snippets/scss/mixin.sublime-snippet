@@ -6,5 +6,5 @@
 ]]></content>
     <tabTrigger>mixin</tabTrigger>
     <scope>source.scss, source.sass</scope>
-    <description>Define mixin</description>
+    <description>mixin</description>
 </snippet>

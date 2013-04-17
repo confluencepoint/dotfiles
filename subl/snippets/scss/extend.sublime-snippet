@@ -4,5 +4,5 @@
 ]]></content>
     <tabTrigger>extend</tabTrigger>
     <scope>source.scss, source.sass</scope>
-    <description>Extend selector</description>
+    <description>extend</description>
 </snippet>

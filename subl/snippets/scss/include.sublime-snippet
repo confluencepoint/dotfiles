@@ -4,5 +4,5 @@
 ]]></content>
     <tabTrigger>include</tabTrigger>
     <scope>source.scss, source.sass</scope>
-    <description>Include mixin</description>
+    <description>include</description>
 </snippet>

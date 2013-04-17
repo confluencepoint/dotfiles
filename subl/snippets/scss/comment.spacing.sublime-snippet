@@ -1,10 +1,8 @@
 <snippet>
     <content><![CDATA[
 // =============================================================================
-// $1
-// =============================================================================
 ]]></content>
-    <tabTrigger>ch</tabTrigger>
+    <tabTrigger>ca</tabTrigger>
     <scope>source.scss, source.sass, source.less, source.styl</scope>
-    <description>Heading comment</description>
+    <description>comment.spacing</description>
 </snippet>

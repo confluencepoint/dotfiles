@@ -1,9 +1,10 @@
 <snippet>
     <content><![CDATA[
+// =============================================================================
 // $1
 // =============================================================================
 ]]></content>
-    <tabTrigger>cs</tabTrigger>
+    <tabTrigger>ch</tabTrigger>
     <scope>source.scss, source.sass, source.less, source.styl</scope>
-    <description>Section comment</description>
+    <description>comment.heading</description>
 </snippet>
