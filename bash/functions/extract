@@ -18,6 +18,6 @@ function extract() {
             *) echo "'$1' cannot be extracted via extract()" ;;
         esac
     else
-        echo "'$1' is not a valid file"
+        printf "'$1' is not a valid file\n"
     fi
 }
