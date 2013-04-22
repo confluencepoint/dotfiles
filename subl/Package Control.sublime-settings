@@ -6,7 +6,6 @@
         "Focus",
         "GitGutter",
         "JSHint",
-        "JsRun",
         "Nodejs",
         "Package Control",
         "SCSS",
@@ -14,6 +13,7 @@
         "SublimeLinter",
         "SublimeRope",
         "Tag",
+        "TernJS",
         "Theme - Soda"
     ]
 }
