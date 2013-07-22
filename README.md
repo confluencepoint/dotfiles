@@ -1,20 +1,20 @@
 # Dotfiles
 
-## How to install
+## Installation
 
 The installation step requires the [XCode Command Line
 Tools](https://developer.apple.com/downloads) and may overwrite existing
 dotfiles in your HOME directory.
 
 ```bash
-$ bash -c "$(curl -fsSL dotfiles.kevinmartensson.com)"
+$ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 ```
 
 N.B. If you wish to fork this project and maintain your own dotfiles, you must
 substitute my username for your own in the above command and the variable
 found at the top of the `bin/dotfiles` script.
 
-## How to update
+## Update
 
 You should run the update when:
 
@@ -70,9 +70,10 @@ Homebrew formulae:
 
 Node packages:
 
-* [bower](http://twitter.github.com/bower/)
-* [grunt-cli](http://gruntjs.com/)
-* [jshint](http://www.jshint.com/)
+* [bower](http://bower.io/)
+* [grunt-cli](http://gruntjs.com//)
+* [jshint](http://jshint.com/)
+* [yo](http://yeoman.io/)
 
 N.B. If your pre-existing Homebrew installation is not in `/usr/local` then you
 must prepend your custom installation's `bin` to the PATH in

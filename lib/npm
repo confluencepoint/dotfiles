@@ -7,7 +7,7 @@ run_npm() {
         log_header "Installing Node.js packages..."
 
         # List of npm packages
-        local packages="bower grunt-cli jshint"
+        local packages="bower grunt-cli jshint yo"
 
         # Install packages globally and quietly
         npm install $packages --global --quiet
