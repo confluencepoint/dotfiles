@@ -29,5 +29,12 @@ if [[ -r $bash_completion_path ]]; then
     source $bash_completion_path
 fi
 
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+if [[ -e "$HOME/.ssh/config" ]]; then
+    complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
+fi
+
 # Add support for grunt autocompletion
-which grunt > /dev/null && eval "$(grunt --completion=bash)"
+if which grunt > /dev/null; then
+    eval "$(grunt --completion=bash)"
+fi
