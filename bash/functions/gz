@@ -1,6 +1,6 @@
 #!/bin/bash
-
 # Compare original and gzipped file size
+
 gz() {
     local origsize=$(wc -c < "$1")
     local gzipsize=$(gzip -c "$1" | wc -c)
