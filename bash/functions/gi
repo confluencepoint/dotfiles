@@ -1,0 +1,8 @@
+#!/bin/bash
+# Install Grunt plugins and add them as `devDependencies` to `package.json`
+# Usage: `gi contrib-watch contrib-uglify zopfli`
+
+gi() {
+    local IFS=,
+    eval npm install --save-dev grunt-{"$*"}
+}
