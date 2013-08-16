@@ -142,13 +142,13 @@ if [[ ! $no_sync ]]; then
 fi
 
 if [[ ! $no_sync ]]; then
-    # Ask before potentially overwriting Sublime Text 2 preferences
-    seek_confirmation "Warning: This step may overwrite your existing Sublime Text 2 preferences."
+    # Ask before potentially overwriting Sublime Text 3 preferences
+    seek_confirmation "Warning: This step may overwrite your existing Sublime Text 3 preferences."
 
     if is_confirmed; then
         run_subl
     else
-        printf "Skipped installing Sublime Text 2 preferences.\n"
+        printf "Skipped installing Sublime Text 3 preferences.\n"
     fi
 fi
 

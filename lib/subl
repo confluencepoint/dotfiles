@@ -1,18 +1,34 @@
 #!/bin/bash
-# Install Sublime Text preferences
+# Install Sublime Text 3 preferences
 
 run_subl() {
     SUBLIME_DOTFILES="${DOTFILES_DIRECTORY}/subl"
-    SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 2/Packages"
+    SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 3/Packages"
     SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
 
-    # If the User directory exists, remove it
-    if [[ -d "${SUBLIME_USER_DIRECTORY}" ]]; then
-        rm -rf "${SUBLIME_USER_DIRECTORY}"
-    fi
-
     # Create symlink
-    ln -s "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
+    ln -fs "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
 
-    [[ $? ]] && log_success "Sublime Text 2 settings updated!"
+    # Install packages
+    declare -a packages=(
+        "https://github.com/emmetio/sublime-tern.git TernJS"
+        "https://github.com/tednaleid/sublime-EasyMotion.git --branch st3 EasyMotion"
+        "https://github.com/SublimeLinter/SublimeLinter.git --branch sublime-text-3 SublimeLinter"
+    )
+
+    for index in ${!packages[*]}
+    do
+        PKG_DIRECTORY=$(echo ${packages[$index]} | awk '{ print $NF }')
+
+        cd "${SUBLIME_DIRECTORY}"
+
+        if [[ ! -d "${PKG_DIRECTORY}" ]]; then
+            git clone ${packages[$index]}
+        else
+            cd "${PKG_DIRECTORY}"
+            git pull --rebase
+        fi
+    done
+
+    [[ $? ]] && log_success "Sublime Text 3 settings updated!"
 }

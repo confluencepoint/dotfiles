@@ -1,19 +1,13 @@
 {
     "installed_packages":
     [
-        "AutoFileName",
+        "BracketHighlighter",
+        "CSScomb",
+        "DocBlockr",
         "EditorConfig",
-        "Focus",
         "GitGutter",
-        "JSHint",
-        "Nodejs",
-        "Package Control",
-        "SCSS",
-        "SublimeCodeIntel",
-        "SublimeLinter",
-        "SublimeRope",
+        "JsFormat",
         "Tag",
-        "TernJS",
         "Theme - Flatland"
     ]
 }

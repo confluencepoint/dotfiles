@@ -1,4 +1,5 @@
 {
+    "sublimelinter_mark_style": "outline",
     "jshint_options" : {
         "bitwise": true,
         "browser": true,
