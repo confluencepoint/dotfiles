@@ -4,8 +4,8 @@ Dotfiles for bash, git, subl, etc.
 
 ## Getting started
 
-* OS X: The [XCode Command Line Tools](https://developer.apple.com/downloads/) must be installed.
-* Windows: [Git for Windows](https://msysgit.github.io/) must be installed.
+* **OS X**: The [XCode Command Line Tools](https://developer.apple.com/downloads/) must be installed.
+* **Windows**: [Git for Windows](https://msysgit.github.io/) must be installed.
 
 The installation step may overwrite existing dotfiles in your `$HOME` directory.
 
@@ -17,7 +17,7 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 
 ### Automatic software installation
 
-Homebrew formulae:
+**Homebrew formulae**:
 
 * GNU core utilities
 * [git](http://git-scm.com/)
@@ -30,7 +30,7 @@ Homebrew formulae:
 * [tree](http://mama.indstate.edu/users/ice/tree/)
 * [wget](http://www.gnu.org/software/wget/)
 
-APT packages:
+**APT packages**:
 
 * build-essentials
 * [git](http://git-scm.com/)
@@ -38,7 +38,7 @@ APT packages:
 * [tree](http://mama.indstate.edu/users/ice/tree/)
 * [wget](http://www.gnu.org/software/wget/)
 
-Node packages:
+**Node packages**:
 
 * [bower](http://bower.io/)
 * [grunt-cli](http://gruntjs.com//)
