@@ -1,20 +1,18 @@
 #!/bin/bash
-# Dotfiles installation script
+# dotfiles installation script
 
-# Variables
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
 DOTFILES_GIT_REMOTE="https://github.com/kevva/dotfiles"
 
 # If missing, download and extract the dotfiles repository
 if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
-    printf "$(tput setaf 7)Downloading dotfiles...$(tput sgr0)\n"
+    if [[ $(type -P tput) ]]; then
+        printf "$(tput setaf 7)Downloading dotfiles...$(tput sgr0)\n"
+    else
+        printf "\033[1;37mDownloading dotfiles...\033[m\n"
+    fi
     mkdir ${DOTFILES_DIRECTORY}
-    # Get the tarball
-    curl -fsSLo ${HOME}/dotfiles.tar.gz ${DOTFILES_GIT_REMOTE}/tarball/master
-    # Extract to the dotfiles directory
-    tar -zxf ${HOME}/dotfiles.tar.gz --strip-components 1 -C ${DOTFILES_DIRECTORY}
-    # Remove the tarball
-    rm -rf ${HOME}/dotfiles.tar.gz
+    curl -fsSL ${DOTFILES_GIT_REMOTE}/tarball/master | tar -xzC ${DOTFILES_DIRECTORY} --strip-components 1
 fi
 
 # Source lib files
@@ -22,17 +20,21 @@ cd ${DOTFILES_DIRECTORY}
 source ./lib/help
 source ./lib/list
 source ./lib/utils
-source ./lib/brew
+if is_os 'darwin'; then
+    source ./lib/brew
+elif is_os 'linux'; then
+    source ./lib/apt
+fi
 source ./lib/npm
 source ./lib/subl
 
-# Help text
+# Help screen
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
     run_help
     exit
 fi
 
-# Help text
+# Additional programs list screen
 if [[ "$1" == "-l" || "$1" == "--list" ]]; then
     run_list
     exit
@@ -41,33 +43,41 @@ fi
 # Test for known flags
 for opt in $@
 do
-    case $opt in
+    case ${opt} in
         -np|--no-packages) no_packages=true ;;
         -ns|--no-sync) no_sync=true ;;
-        -*|--*) log_warning "Warning: invalid option $opt" ;;
+        -*|--*) log_warning "Warning: invalid option ${opt}" ;;
     esac
 done
 
 # Before relying on Homebrew, check that packages can be compiled
-if ! type_exists 'gcc'; then
-    log_error "The XCode Command Line Tools must be installed first."
+if is_os 'darwin' && ! type_exists 'gcc'; then
+    log_error "The XCode Command Line Tools must be installed first"
     printf "  Download them from: https://developer.apple.com/downloads\n"
     printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
     exit 1
 fi
 
 # Check for Homebrew
-if ! type_exists 'brew'; then
+if is_os 'darwin' && ! type_exists 'brew'; then
     log_header "Installing Homebrew..."
     ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
 fi
 
 # Check for git
-if ! type_exists 'git'; then
+if is_os 'darwin' && ! type_exists 'git'; then
     log_header "Updating Homebrew..."
     brew update
     log_header "Installing Git..."
     brew install git
+elif is_os 'linux' && ! type_exists 'git'; then
+    log_header "Installing Git..."
+    sudo apt-get -qq install git-core
+elif ! is_os 'linux' && ! is_os 'darwin' && ! type_exists 'git'; then
+    log_error "Git for Windows must be installed first"
+    printf "  Download it from: http://msysgit.github.io/\n"
+    printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
+    exit 1
 fi
 
 # Initialize the git repository if it's missing
@@ -84,29 +94,29 @@ if ! is_git_repo; then
 fi
 
 # Conditionally sync with the remote repository
-if [[ $no_sync ]]; then
+if [[ ${no_sync} ]]; then
     printf "Skipped dotfiles sync.\n"
 else
     log_header "Syncing dotfiles..."
-    # Pull down the latest changes
     git pull --rebase origin master
-    # Update submodules
     git submodule update --recursive --init --quiet
 fi
 
 # Install and update packages
-if [[ $no_packages ]]; then
+if [[ ${no_packages} ]]; then
     printf "Skipped package installations.\n"
 else
     printf "Updating packages...\n"
-    # Install Homebrew formulae
-    run_brew
-    # Install Node packages
+    if is_os 'darwin'; then
+        run_brew
+    elif is_os 'linux'; then
+        run_apt
+    fi
     run_npm
 fi
 
+# Force create/replace symlink
 link() {
-    # Force create/replace the symlink.
     ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
 }
 
@@ -114,7 +124,11 @@ mirrorfiles() {
     # Copy `.gitconfig`.
     # Any global git commands in `~/.bash_profile.local` will be written to
     # `.gitconfig`. This prevents them being committed to the repository.
-    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+    if type_exists 'rsync'; then
+        rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+    else
+        cp -av ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+    fi
 
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
@@ -128,7 +142,7 @@ mirrorfiles() {
     log_success "Dotfiles update complete!"
 }
 
-if [[ ! $no_sync ]]; then
+if [[ ! ${no_sync} ]]; then
     # Ask before potentially overwriting files
     seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
@@ -141,23 +155,23 @@ if [[ ! $no_sync ]]; then
     fi
 fi
 
-if [[ ! $no_sync ]]; then
-    # Ask before potentially overwriting Sublime Text 3 preferences
-    seek_confirmation "Warning: This step may overwrite your existing Sublime Text 3 preferences."
-
-    if is_confirmed; then
-        run_subl
-    else
-        printf "Skipped installing Sublime Text 3 preferences.\n"
-    fi
-fi
-
-# Ask before potentially overwriting OS X defaults
-seek_confirmation "Warning: This step may modify your OS X system defaults."
+# Ask before potentially overwriting Sublime Text 3 preferences
+seek_confirmation "Warning: This step may overwrite your existing Sublime Text 3 preferences."
 
 if is_confirmed; then
-    bash ./bin/osxdefaults
-    log_success "OS X settings updated! You may need to restart."
+    run_subl
 else
-    printf "Skipped OS X settings update.\n"
+    printf "Skipped installing Sublime Text 3 preferences.\n"
+fi
+
+if is_os 'darwin'; then
+    # Ask before potentially overwriting OS X defaults
+    seek_confirmation "Warning: This step may modify your OS X system defaults."
+
+    if is_confirmed; then
+        bash ./bin/osxdefaults
+        log_success "OS X settings updated! You may need to restart."
+    else
+        printf "Skipped OS X settings update.\n"
+    fi
 fi

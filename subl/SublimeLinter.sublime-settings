@@ -2,11 +2,9 @@
     "sublimelinter_mark_style": "outline",
     "jshint_options" : {
         "bitwise": true,
-        "browser": true,
         "camelcase": true,
         "curly": true,
         "eqeqeq": true,
-        "es5": true,
         "esnext": true,
         "immed": true,
         "latedef": true,

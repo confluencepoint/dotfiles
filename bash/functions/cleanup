@@ -4,5 +4,5 @@
 
 cleanup() {
     local q="${1:-*.DS_Store}"
-    find . -type f -name "$q" -ls -delete
+    find . -type f -name "${q}" -ls -delete
 }

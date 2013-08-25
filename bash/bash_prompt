@@ -7,26 +7,42 @@
 
 # Check that terminfo exists before changing TERM var to xterm-256color
 # Prevents prompt flashing in Mac OS X 10.6 Terminal.app
-if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+if [[ -e /usr/share/terminfo/x/xterm-256color ]]; then
     export TERM='xterm-256color'
 fi
 
-tput sgr 0 0
-
 # Base styles and color palette
 # Solarized colors
-# https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized
-BOLD=$(tput bold)
-RESET=$(tput sgr0)
-SOLAR_YELLOW=$(tput setaf 136)
-SOLAR_ORANGE=$(tput setaf 166)
-SOLAR_RED=$(tput setaf 124)
-SOLAR_MAGENTA=$(tput setaf 125)
-SOLAR_VIOLET=$(tput setaf 61)
-SOLAR_BLUE=$(tput setaf 33)
-SOLAR_CYAN=$(tput setaf 37)
-SOLAR_GREEN=$(tput setaf 64)
-SOLAR_WHITE=$(tput setaf 254)
+if [[ $(type -P tput) ]]; then
+    # Reset colors
+    tput sgr 0 0
+
+    # https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized
+    BOLD=$(tput bold)
+    RESET=$(tput sgr0)
+    SOLAR_YELLOW=$(tput setaf 136)
+    SOLAR_ORANGE=$(tput setaf 166)
+    SOLAR_RED=$(tput setaf 124)
+    SOLAR_MAGENTA=$(tput setaf 125)
+    SOLAR_VIOLET=$(tput setaf 61)
+    SOLAR_BLUE=$(tput setaf 33)
+    SOLAR_CYAN=$(tput setaf 37)
+    SOLAR_GREEN=$(tput setaf 64)
+    SOLAR_WHITE=$(tput setaf 254)
+else
+    # https://github.com/stevenharman/console2-solarized
+    BOLD="\033[1m"
+    RESET="\033[m"
+    SOLAR_YELLOW="\033[0;33m"
+    SOLAR_ORANGE="\033[1;31m"
+    SOLAR_RED="\033[0;31m"
+    SOLAR_MAGENTA="\033[0;35m"
+    SOLAR_VIOLET="\033[1;35m"
+    SOLAR_BLUE="\033[0;34m"
+    SOLAR_CYAN="\033[0;36m"
+    SOLAR_GREEN="\033[0;32m"
+    SOLAR_WHITE="\033[1;37m"
+fi
 
 style_user="\[${RESET}${SOLAR_ORANGE}\]"
 style_host="\[${RESET}${SOLAR_YELLOW}\]"
@@ -34,10 +50,10 @@ style_path="\[${RESET}${SOLAR_GREEN}\]"
 style_chars="\[${RESET}${SOLAR_WHITE}\]"
 style_branch="${SOLAR_CYAN}"
 
-if [[ "$SSH_TTY" ]]; then
+if [[ "${SSH_TTY}" ]]; then
     # Connected via ssh
     style_host="\[${BOLD}${SOLAR_RED}\]"
-elif [[ "$USER" == "root" ]]; then
+elif [[ "${USER}" == "root" ]]; then
     # Logged in as root
     style_user="\[${BOLD}${SOLAR_RED}\]"
 fi
@@ -60,7 +76,7 @@ get_git_branch() {
     # Otherwise, just give up
     branch_name="(unknown)"
 
-    printf $branch_name
+    printf ${branch_name}
 }
 
 # Git status information
@@ -84,7 +100,7 @@ prompt_git() {
     fi
 
     # Check for untracked files
-    if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+    if [[ -n "$(git ls-files --others --exclude-standard)" ]]; then
         ut="?"
     fi
 
@@ -93,11 +109,11 @@ prompt_git() {
         st="$"
     fi
 
-    git_state=$uc$us$ut$st
+    git_state=${uc}${us}${ut}${st}
 
     # Combine the branch name and state information
-    if [[ $git_state ]]; then
-        git_info="$git_info[$git_state]"
+    if [[ ${git_state} ]]; then
+        git_info="${git_info}[${git_state}]"
     fi
 
     printf "${SOLAR_WHITE} on ${style_branch}${git_info}"

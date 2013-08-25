@@ -1,16 +1,39 @@
 #!/bin/bash
-# Install Sublime Text 3 preferences
+# Sublime Text 3 preferences
 
 run_subl() {
     SUBLIME_DOTFILES="${DOTFILES_DIRECTORY}/subl"
-    SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 3/Packages"
+    if is_os 'darwin'; then
+        SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 3/Packages"
+    elif is_os 'linux'; then
+        SUBLIME_DIRECTORY="${HOME}/.config/sublime-text-3/Packages"
+    elif is_os 'msys'; then
+        SUBLIME_DIRECTORY="${APPDATA}/Sublime Text 3/Packages"
+    fi
     SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
 
-    # Create symlink
+    log_header "Writing Sublime Text 3 preferences..."
+    cd ${SUBLIME_DOTFILES}
+    # Recreate directory structure to avoid permission errors
+    find -type d -exec mkdir -p "${SUBLIME_USER_DIRECTORY}"/{} \;
+    # Symlink the folder
     ln -fs "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
 
-    # Install packages
-    declare -a packages=(
+    # Create CLI symlink
+    touch "${DOTFILES_DIRECTORY}/bin/slt"
+    if is_os 'darwin'; then
+tee -a <<EOF > ${DOTFILES_DIRECTORY}/bin/slt
+/Applications/Sublime Text 3.app/Contents/SharedSupport/bin/subl
+EOF
+    elif is_os 'msys'; then
+tee -a <<EOF > ${DOTFILES_DIRECTORY}/bin/slt
+"${PROGRAMFILES}/Sublime Text 3/sublime_text.exe" "\$@"
+EOF
+    fi
+    [[ $? ]] && log_success "Done"
+
+    log_header "Installing Sublime Text 3 packages..."
+    local -a packages=(
         "https://github.com/emmetio/sublime-tern.git TernJS"
         "https://github.com/tednaleid/sublime-EasyMotion.git --branch st3 EasyMotion"
         "https://github.com/SublimeLinter/SublimeLinter.git --branch sublime-text-3 SublimeLinter"
@@ -19,14 +42,15 @@ run_subl() {
     for index in ${!packages[*]}
     do
         PKG_DIRECTORY=$(echo ${packages[$index]} | awk '{ print $NF }')
-
         cd "${SUBLIME_DIRECTORY}"
 
         if [[ ! -d "${PKG_DIRECTORY}" ]]; then
+            # If missing, clone the package
             git clone ${packages[$index]}
         else
+            # If package exists, make sure it's up to date
             cd "${PKG_DIRECTORY}"
-            git pull --rebase
+            git pull --rebase origin
         fi
     done
 

@@ -9,6 +9,9 @@ alias .....="cd ../../../.."
 alias ~="cd ~"
 alias -- -="cd -"
 
+# Enable aliases to be sudo'ed
+alias sudo='sudo '
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then
     colorflag="--color"
@@ -22,8 +25,7 @@ alias l="ls -lAh ${colorflag}"
 # Concatenate and print content of files (add line numbers)
 alias catn="cat -n"
 
-# Copy public key to the pasteboard
-alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'"
-
 # Flush DNS cache
-alias flushdns="dscacheutil -flushcache"
+if [[ $(type -P dscacheutil) ]]; then
+    alias flushdns="dscacheutil -flushcache"
+fi
