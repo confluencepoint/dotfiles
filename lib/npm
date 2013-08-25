@@ -10,7 +10,7 @@ run_npm() {
         local packages="bower grunt-cli jshint yo"
 
         # Install packages globally and quietly
-        npm install $packages --global --quiet
+        npm install ${packages} --global --quiet
 
         [[ $? ]] && log_success "Done"
     else

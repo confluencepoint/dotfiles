@@ -47,7 +47,7 @@ seek_confirmation() {
 
 # Test whether the result of an 'ask' is a confirmation
 is_confirmed() {
-    if [[ "$REPLY" == "Y" || "$REPLY" == "y" ]]; then
+    if [[ "${REPLY}" == "Y" || "${REPLY}" == "y" ]]; then
         return 0
     fi
     return 1
@@ -61,7 +61,7 @@ is_git_repo() {
 # Test which OS the user runs
 # $1 - OS to test
 is_os() {
-    if [[ "$OSTYPE" == $1* ]]; then
+    if [[ "${OSTYPE}" == $1* ]]; then
         return 0
     fi
     return 1
@@ -79,7 +79,7 @@ type_exists() {
 # Test whether a Homebrew formula is already installed
 # $1 - formula name (may include options)
 formula_exists() {
-    if $(brew list $1 >/dev/null); then
+    if [[ $(brew list $1 >/dev/null) ]]; then
         printf "%s already installed.\n" "$1"
         return 0
     fi
