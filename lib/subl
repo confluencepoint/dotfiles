@@ -13,9 +13,6 @@ run_subl() {
     SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
 
     log_header "Writing Sublime Text 3 preferences..."
-    cd ${SUBLIME_DOTFILES}
-    # Recreate directory structure to avoid permission errors
-    find -type d -exec mkdir -p "${SUBLIME_USER_DIRECTORY}"/{} \;
     # Symlink the folder
     ln -fs "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
 
