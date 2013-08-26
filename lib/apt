@@ -19,6 +19,7 @@ run_apt() {
         local -a missing_repositories
         local -a desired_repositories=(
             'chris-lea/node.js'
+            'webupd8team/sublime-text-3'
         )
 
         for index in ${!desired_repositories[*]}
@@ -50,6 +51,8 @@ run_apt() {
             'git-core'
             'libssl-dev'
             'nodejs'
+            'sublime-text-installer'
+            'tmux'
             'tree'
             'wget'
         )

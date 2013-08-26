@@ -19,6 +19,8 @@ run_subl() {
     # Create CLI symlink
     if is_os 'darwin'; then
         ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${DOTFILES_DIRECTORY}/bin/slt"
+    elif is_os 'linux'; then
+        ln -s "/usr/bin/subl" "${DOTFILES_DIRECTORY}/bin/slt"
     elif is_os 'msys'; then
 tee <<EOF > ${DOTFILES_DIRECTORY}/bin/slt
 "${PROGRAMFILES}/Sublime Text 3/sublime_text.exe" "\$@"

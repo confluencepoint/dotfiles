@@ -33,8 +33,11 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 **APT packages**:
 
 * build-essentials
-* [git](http://git-scm.com/)
-* [node](http://nodejs.org/)
+* [git-core](http://git-scm.com/)
+* libssl-dev
+* [nodejs](http://nodejs.org/)
+* [sublime-text-installer](http://sublimetext.com/)
+* [tmux](http://tmux.sourceforge.net/‎)
 * [tree](http://mama.indstate.edu/users/ice/tree/)
 * [wget](http://www.gnu.org/software/wget/)
 
