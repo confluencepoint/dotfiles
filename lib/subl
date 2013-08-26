@@ -26,27 +26,29 @@ EOF
     fi
     [[ $? ]] && log_success "Done"
 
-    log_header "Installing Sublime Text 3 packages..."
-    local -a packages=(
-        "https://github.com/emmetio/sublime-tern.git TernJS"
-        "https://github.com/tednaleid/sublime-EasyMotion.git --branch st3 EasyMotion"
-        "https://github.com/SublimeLinter/SublimeLinter.git --branch sublime-text-3 SublimeLinter"
-    )
+    if [[ ! ${no_packages} ]]; then
+        log_header "Installing Sublime Text 3 packages..."
+        local -a packages=(
+            "https://github.com/emmetio/sublime-tern.git TernJS"
+            "https://github.com/tednaleid/sublime-EasyMotion.git --branch st3 EasyMotion"
+            "https://github.com/SublimeLinter/SublimeLinter.git --branch sublime-text-3 SublimeLinter"
+        )
 
-    for index in ${!packages[*]}
-    do
-        PKG_DIRECTORY=$(echo ${packages[$index]} | awk '{ print $NF }')
-        cd "${SUBLIME_DIRECTORY}"
+        for index in ${!packages[*]}
+        do
+            PKG_DIRECTORY=$(echo ${packages[$index]} | awk '{ print $NF }')
+            cd "${SUBLIME_DIRECTORY}"
 
-        if [[ ! -d "${PKG_DIRECTORY}" ]]; then
-            # If missing, clone the package
-            git clone ${packages[$index]}
-        else
-            # If package exists, make sure it's up to date
-            cd "${PKG_DIRECTORY}"
-            git pull --rebase origin
-        fi
-    done
+            if [[ ! -d "${PKG_DIRECTORY}" ]]; then
+                # If missing, clone the package
+                git clone ${packages[$index]}
+            else
+                # If package exists, make sure it's up to date
+                cd "${PKG_DIRECTORY}"
+                git pull --rebase origin
+            fi
+        done
 
-    [[ $? ]] && log_success "Sublime Text 3 settings updated!"
+        [[ $? ]] && log_success "Done"
+    fi
 }
