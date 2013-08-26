@@ -6,6 +6,11 @@ run_npm() {
     if type_exists 'npm'; then
         log_header "Installing Node.js packages..."
 
+        # Give permissions
+        if is_os 'darwin' && is_os 'linux'; then
+            sudo chown -R ${USER} /usr/local
+        fi
+
         # List of npm packages
         local packages="bower grunt-cli jshint yo"
 

@@ -106,7 +106,6 @@ fi
 if [[ ${no_packages} ]]; then
     printf "Skipped package installations.\n"
 else
-    printf "Updating packages...\n"
     if is_os 'darwin'; then
         run_brew
     elif is_os 'linux'; then
