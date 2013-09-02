@@ -13,6 +13,10 @@ run_subl() {
     SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
 
     log_header "Writing Sublime Text 3 preferences..."
+    # If the User directory exists, remove it
+    if [[ -d "${SUBLIME_USER_DIRECTORY}" ]]; then
+        rm -rf "${SUBLIME_USER_DIRECTORY}"
+    fi
     # Symlink the folder
     ln -fs "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
 
