@@ -20,13 +20,18 @@ run_subl() {
     # Symlink the folder
     ln -fs "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
 
+    # Create `~/bin` if it doesn't exist
+    if [[ ! -d "${HOME}/bin" ]]; then
+         mkdir "${HOME}/bin"
+    fi
+
     # Create CLI symlink
     if is_os 'darwin'; then
-        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${DOTFILES_DIRECTORY}/bin/slt"
+        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/slt"
     elif is_os 'linux'; then
-        ln -s "/usr/bin/subl" "${DOTFILES_DIRECTORY}/bin/slt"
+        ln -s "/usr/bin/subl" "${HOME}/bin/slt"
     elif is_os 'msys'; then
-tee <<EOF > ${DOTFILES_DIRECTORY}/bin/slt
+tee <<EOF > ${HOME}/bin/slt
 "${PROGRAMFILES}/Sublime Text 3/sublime_text.exe" "\$@"
 EOF
     fi
