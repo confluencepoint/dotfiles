@@ -26,11 +26,11 @@ run_subl() {
     fi
 
     # Create CLI symlink
-    if is_os 'darwin'; then
+    if is_os 'darwin' && [[ ! -r "${HOME}/bin/slt" ]]; then
         ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/slt"
-    elif is_os 'linux'; then
+    elif is_os 'linux' && [[ ! -r "${HOME}/bin/slt" ]]; then
         ln -s "/usr/bin/subl" "${HOME}/bin/slt"
-    elif is_os 'msys'; then
+    elif is_os 'msys' && [[ ! -r "${HOME}/bin/slt" ]]; then
 tee <<EOF > ${HOME}/bin/slt
 "${PROGRAMFILES}/Sublime Text 3/sublime_text.exe" "\$@"
 EOF
