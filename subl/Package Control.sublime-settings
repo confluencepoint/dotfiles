@@ -6,8 +6,10 @@
         "DocBlockr",
         "EditorConfig",
         "GitGutter",
+        "Jade",
         "JsFormat",
         "Markdown Preview",
+        "SublimeCodeIntel",
         "Tag",
         "Theme - Flatland"
     ]
