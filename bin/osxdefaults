@@ -280,6 +280,9 @@ defaults write com.apple.spotlight DictionaryLookupEnabled -bool false
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-for app in "Dashboard" "Dock" "Finder" "Safari" "SystemUIServer" "Terminal"; do
+# Disable automatic emoji substitution in Messages.app (i.e. use plain text smileys)
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+
+for app in "Dashboard" "Dock" "Finder" "Messages" "Safari" "SystemUIServer" "Terminal"; do
     killall "$app" > /dev/null 2>&1
 done
