@@ -1,6 +1,6 @@
 [alias]
     # Fetch a repository ($1) and checkout its ref ($2) HEAD
-    br = !bash -c 'git fetch "$1" "$2" && git checkout FETCH_HEAD' -
+    br = !bash -c 'git fetch $1 ${2:-HEAD} && git checkout FETCH_HEAD' -
 
     # Clone a repository including all submodules
     c = clone --recursive
@@ -14,6 +14,10 @@
     # Shows the diff between the state `$number` revisions ago and the
     # current state
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+    # Fetch and checkout a GitHub Pull Request from a remote (defaults to `origin`)
+    # Use: `git gh-pr 123` or `git gh-pr 123 upstream`
+    gh-pr = !bash -c 'git fetch -fu ${2:-origin} refs/pull/$1/head:gh-pr/$1 && git checkout gh-pr/$1' -
 
     # Switch to a branch, creating it if necessary
     go = !"bash -c 'if $(git show-ref --verify refs/heads/$0 &> /dev/null); then\ngit checkout $0\n else\n git checkout -b $0\n fi'"
