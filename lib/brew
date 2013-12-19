@@ -25,7 +25,6 @@ run_brew() {
             'bash-completion'
             'jpeg'
             'mongodb'
-            'node'
             'optipng'
             'phantomjs'
             'tree'
