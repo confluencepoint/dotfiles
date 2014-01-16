@@ -1,63 +1,11 @@
 {
     "user": {
-        "debug": false,
-        "delay": 0.25,
-        "error_color": "D02000",
-        "gutter_theme": "Packages/SublimeLinter/gutter-themes/Default.gutter-theme",
-        "gutter_theme_excludes": [],
-        "lint_mode": "background",
+        "delay": 0,
         "linters": {
             "csslint": {
-                "@disable": false,
-                "args": [],
-                "errors": "",
-                "excludes": [],
-                "ignore": "ids, import, box-model, box-sizing",
-                "warnings": ""
-            },
-            "jshint": {
-                "@disable": false,
-                "args": [],
-                "excludes": []
-            },
-            "json": {
-                "@disable": false,
-                "args": [],
-                "excludes": []
-            },
-            "php": {
-                "@disable": false,
-                "args": [],
-                "excludes": []
-            },
-            "phplint": {
-                "@disable": false,
-                "args": [],
-                "excludes": []
+                "ignore": "ids, import, box-model, box-sizing"
             }
         },
-        "mark_style": "outline",
-        "paths": {
-            "linux": [],
-            "osx": [],
-            "windows": []
-        },
-        "python_paths": {
-            "linux": [],
-            "osx": [],
-            "windows": []
-        },
-        "rc_search_limit": 3,
-        "show_errors_on_save": false,
-        "show_marks_in_minimap": true,
-        "syntax_map": {
-            "php": "html"
-        },
-        "sublimelinter_executable_map": {
-            "node": "~/.nvm/v0.11.9/bin/node"
-        },
-        "sublimelinter_mark_style": "fill",
-        "warning_color": "DDB700",
-        "wrap_find": true
+        "sublimelinter_mark_style": "fill"
     }
 }

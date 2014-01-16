@@ -1,16 +1,14 @@
 {
-    "installed_packages":
-    [
+    "installed_packages": [
         "BracketHighlighter",
-        "CSScomb",
         "DocBlockr",
         "EditorConfig",
         "GitGutter",
-        "Jade",
-        "JsFormat",
-        "Markdown Preview",
         "SublimeCodeIntel",
-        "Tag",
+        "SublimeLinter",
+        "SublimeLinter-csslint",
+        "SublimeLinter-jshint",
+        "SublimeLinter-json",
         "Theme - Flatland"
     ]
 }
