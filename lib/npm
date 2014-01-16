@@ -12,7 +12,7 @@ run_npm() {
         fi
 
         # List of npm packages
-        local packages="bower grunt-cli jshint yo"
+        local packages="bower component csslint grunt-cli gulp jshint yo"
 
         # Install packages globally and quietly
         npm install ${packages} --global --quiet
