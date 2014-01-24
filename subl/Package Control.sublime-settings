@@ -9,6 +9,7 @@
         "SublimeLinter-csslint",
         "SublimeLinter-jshint",
         "SublimeLinter-json",
-        "Theme - Flatland"
+        "Tag",
+        "Theme - Spacegray"
     ]
 }
