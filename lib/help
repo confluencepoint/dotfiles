@@ -9,7 +9,6 @@ Usage: $(basename "$0") [options]
 
 Options:
     -h,  --help          Print this help text
-    -l,  --list          Print a list of additional software to install
     -np, --no-packages   Suppress package updates
     -ns, --no-sync       Suppress pulling from the remote repository
 

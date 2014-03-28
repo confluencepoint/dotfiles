@@ -12,18 +12,9 @@ declare -a dirs_to_append=(
     "/usr/bin"
     "${HOME}/bin"
     "${HOME}/.dotfiles/bin"
-    "${HOME}/.rvm/bin"
+    "$(brew --prefix coreutils)/libexec/gnubin"
+    "$(brew --prefix)/share/npm/bin"
 )
-
-# Homebrew directories to be appended to PATH
-if [[ $(type -P brew) ]]; then
-    declare -a brew_to_append=(
-        # Add brew-installed GNU core utilities bin
-        "$(brew --prefix coreutils)/libexec/gnubin"
-        # Add npm-installed package bin
-        "$(brew --prefix)/share/npm/bin"
-    )
-fi
 
 # Prepend directories to PATH
 for index in ${!dirs_to_prepend[*]}
@@ -42,17 +33,6 @@ do
         PATH="${PATH}:${dirs_to_append[$index]}"
     fi
 done
-
-# Append Homebrew directories to PATH
-if [[ $(type -P brew) ]]; then
-    for index in ${!brew_to_append[*]}
-    do
-        if [ -d ${brew_to_append[$index]} ]; then
-            # If these bins exist, then append them to existing PATH
-            PATH="${PATH}:${brew_to_append[$index]}"
-        fi
-    done
-fi
 
 unset dirs_to_prepend dirs_to_append brew_to_append
 

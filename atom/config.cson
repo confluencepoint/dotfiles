@@ -1,0 +1,32 @@
+'editor':
+  'fontFamily': 'Monaco'
+  'tabLength': 4
+  'fontSize': 14
+  'showInvisibles': true
+'core':
+  'themes': [
+    'spacegray-dark-ui'
+    'solarized-dark-syntax'
+  ]
+  'ignoredNames': [
+    '.git'
+    '.svn'
+    '.DS_Store'
+  ]
+'exception-reporting':
+  'userId': '9a0bb649-c613-b331-2823-feb5dd17b3e8'
+'release-notes':
+  'viewedVersion': '0.71.0'
+'welcome':
+  'showOnStartup': false
+'metrics':
+  'userId': '81f3a1df1486d208a9113d029074435f40278252'
+'autocomplete': {}
+'autoprefixer':
+  'browsers': [
+    '> 1%'
+    'last 2 versions'
+    'Firefox ESR'
+    'Opera 12.1'
+  ]
+'whitespace': {}

@@ -2,29 +2,23 @@
 # dotfiles installation script
 
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
-DOTFILES_GIT_REMOTE="https://github.com/kevva/dotfiles"
+DOTFILES_GIT_REMOTE="git@github.com:necolas/dotfiles.git"
+DOTFILES_TARBALL_PATH="https://github.com/kevva/dotfiles/tarball/master"
 
 # If missing, download and extract the dotfiles repository
 if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
-    if [[ $(type -P tput) ]]; then
-        printf "$(tput setaf 7)Downloading dotfiles...$(tput sgr0)\n"
-    else
-        printf "\033[1;37mDownloading dotfiles...\033[m\n"
-    fi
+    printf "$(tput setaf 7)Downloading dotfiles...$(tput sgr0)\n"
     mkdir ${DOTFILES_DIRECTORY}
-    curl -fsSL ${DOTFILES_GIT_REMOTE}/tarball/master | tar -xzC ${DOTFILES_DIRECTORY} --strip-components 1
+    curl -fsSL ${DOTFILES_TARBALL_PATH} | tar -xzC ${DOTFILES_DIRECTORY} --strip-components 1
 fi
 
-# Source lib files
 cd ${DOTFILES_DIRECTORY}
+
+# Source lib files
 source ./lib/help
 source ./lib/list
 source ./lib/utils
-if is_os 'darwin'; then
-    source ./lib/brew
-elif is_os 'linux'; then
-    source ./lib/apt
-fi
+source ./lib/brew
 source ./lib/npm
 source ./lib/subl
 
@@ -51,7 +45,7 @@ do
 done
 
 # Before relying on Homebrew, check that packages can be compiled
-if is_os 'darwin' && ! type_exists 'gcc'; then
+if ! type_exists 'gcc'; then
     log_error "The XCode Command Line Tools must be installed first"
     printf "  Download them from: https://developer.apple.com/downloads\n"
     printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
@@ -59,25 +53,17 @@ if is_os 'darwin' && ! type_exists 'gcc'; then
 fi
 
 # Check for Homebrew
-if is_os 'darwin' && ! type_exists 'brew'; then
+if ! type_exists 'brew'; then
     log_header "Installing Homebrew..."
     ruby -e "$(curl -fsSkL https://raw.github.com/Homebrew/homebrew/go/install)"
 fi
 
 # Check for git
-if is_os 'darwin' && ! type_exists 'git'; then
+if ! type_exists 'git'; then
     log_header "Updating Homebrew..."
     brew update
     log_header "Installing Git..."
     brew install git
-elif is_os 'linux' && ! type_exists 'git'; then
-    log_header "Installing Git..."
-    sudo apt-get -qq install git-core
-elif ! is_os 'linux' && ! is_os 'darwin' && ! type_exists 'git'; then
-    log_error "Git for Windows must be installed first"
-    printf "  Download it from: http://msysgit.github.io/\n"
-    printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
-    exit 1
 fi
 
 # Initialize the git repository if it's missing
@@ -99,18 +85,13 @@ if [[ ${no_sync} ]]; then
 else
     log_header "Syncing dotfiles..."
     git pull --rebase origin master
-    git submodule update --recursive --init --quiet
 fi
 
 # Install and update packages
 if [[ ${no_packages} ]]; then
     printf "Skipped package installations.\n"
 else
-    if is_os 'darwin'; then
-        run_brew
-    elif is_os 'linux'; then
-        run_apt
-    fi
+    run_brew
     run_npm
 fi
 
@@ -123,15 +104,14 @@ mirrorfiles() {
     # Copy `.gitconfig`.
     # Any global git commands in `~/.bash_profile.local` will be written to
     # `.gitconfig`. This prevents them being committed to the repository.
-    if type_exists 'rsync'; then
-        rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
-    else
-        cp -av ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
-    fi
+    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
 
     # Create the necessary symbolic links between the `.dotfiles` and `HOME`
     # directory. The `bash_profile` sources other files directly from the
     # `.dotfiles` repository.
+    link "atom/config.cson"   ".atom/config.cson"
+    link "atom/snippets.cson" ".atom/snippets.cson"
+    link "atom/styles.css"    ".atom/styles.css"
     link "bash/bashrc"        ".bashrc"
     link "bash/bash_profile"  ".bash_profile"
     link "bash/inputrc"       ".inputrc"
@@ -141,36 +121,23 @@ mirrorfiles() {
     log_success "Dotfiles update complete!"
 }
 
-if [[ ! ${no_sync} ]]; then
-    # Ask before potentially overwriting files
-    seek_confirmation "Warning: This step may overwrite your existing dotfiles."
-
-    if is_confirmed; then
-        mirrorfiles
-        source ${HOME}/.bash_profile
-    else
-        printf "Aborting...\n"
-        exit 1
-    fi
-fi
-
-# Ask before potentially overwriting Sublime Text 3 preferences
-seek_confirmation "Warning: This step may overwrite your existing Sublime Text 3 preferences."
+# Ask before potentially overwriting files
+seek_confirmation "Warning: This step may overwrite your existing dotfiles."
 
 if is_confirmed; then
-    run_subl
+    mirrorfiles
+    source ${HOME}/.bash_profile
 else
-    printf "Skipped installing Sublime Text 3 preferences.\n"
+    printf "Aborting...\n"
+    exit 1
 fi
 
-if is_os 'darwin'; then
-    # Ask before potentially overwriting OS X defaults
-    seek_confirmation "Warning: This step may modify your OS X system defaults."
+# Ask before potentially overwriting OS X defaults
+seek_confirmation "Warning: This step may modify your OS X system defaults."
 
-    if is_confirmed; then
-        bash ./bin/osxdefaults
-        log_success "OS X settings updated! You may need to restart."
-    else
-        printf "Skipped OS X settings update.\n"
-    fi
+if is_confirmed; then
+    bash ./bin/osxdefaults
+    log_success "OS X settings updated! You may need to restart."
+else
+    printf "Skipped OS X settings update.\n"
 fi

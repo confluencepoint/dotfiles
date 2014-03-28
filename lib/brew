@@ -23,10 +23,6 @@ run_brew() {
             'ack'
             'bash'
             'bash-completion'
-            'jpeg'
-            'mongodb'
-            'optipng'
-            'phantomjs'
             'tree'
             'wget'
         )
@@ -49,6 +45,9 @@ run_brew() {
 
             [[ $? ]] && log_success "Done"
         fi
+
+        # Install latest rsync
+        brew install https://raw.github.com/Homebrew/homebrew-dupes/master/rsync.rb
 
         # Remove outdated versions from the Cellar
         brew cleanup

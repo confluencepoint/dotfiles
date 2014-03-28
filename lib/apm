@@ -1,0 +1,22 @@
+#!/bin/bash
+# apm package installation
+
+run_apm() {
+    # Check for apm
+    if type_exists 'apm'; then
+        log_header "Installing Atom packages..."
+
+        # List of npm packages
+        local packages="autoprefixer editorconfig jshint language-jade sort-lines spacegray-dark-ui travis-ci-status uglify visual-bell"
+
+        # Install packages
+        apm install ${packages}
+
+        [[ $? ]] && log_success "Done"
+    else
+        printf "\n"
+        log_error "Error: apm not found."
+        printf "Aborting...\n"
+        exit
+    fi
+}

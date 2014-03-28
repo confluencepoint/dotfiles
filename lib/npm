@@ -7,12 +7,10 @@ run_npm() {
         log_header "Installing Node.js packages..."
 
         # Give permissions
-        if is_os 'darwin' && is_os 'linux'; then
-            sudo chown -R ${USER} /usr/local
-        fi
+        sudo chown -R ${USER} /usr/local
 
         # List of npm packages
-        local packages="bower component csslint grunt-cli gulp jshint yo"
+        local packages="bower component gulp jshint yo"
 
         # Install packages globally and quietly
         npm install ${packages} --global --quiet

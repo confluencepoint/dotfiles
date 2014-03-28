@@ -4,10 +4,9 @@ Dotfiles for bash, git, subl, etc.
 
 ## Getting started
 
-* **OS X**: The [XCode Command Line Tools](https://developer.apple.com/downloads/) must be installed.
-* **Windows**: [Git for Windows](https://msysgit.github.io/) must be installed.
-
-The installation step may overwrite existing dotfiles in your `$HOME` directory.
+The installation step requires the [XCode Command Line
+Tools](https://developer.apple.com/downloads) and may overwrite existing
+dotfiles in your HOME directory.
 
 ```bash
 $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
@@ -23,30 +22,28 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 * [git](http://git-scm.com/)
 * [ack](http://betterthangrep.com/)
 * [bash-completion](http://bash-completion.alioth.debian.org/)
-* jpeg
-* [node](http://nodejs.org/)
-* [optipng](http://optipng.sourceforge.net/)
-* [phantomjs](http://phantomjs.org/)
-* [tree](http://mama.indstate.edu/users/ice/tree/)
-* [wget](http://www.gnu.org/software/wget/)
-
-**APT packages**:
-
-* build-essentials
-* [git-core](http://git-scm.com/)
-* libssl-dev
-* [nodejs](http://nodejs.org/)
-* [sublime-text-installer](http://sublimetext.com/)
-* [tmux](http://tmux.sourceforge.net/‎)
 * [tree](http://mama.indstate.edu/users/ice/tree/)
 * [wget](http://www.gnu.org/software/wget/)
 
 **Node packages**:
 
 * [bower](http://bower.io/)
-* [grunt-cli](http://gruntjs.com//)
+* [component](http://component.io/)
+* [gulp](http://gulpjs.com/)
 * [jshint](http://jshint.com/)
 * [yo](http://yeoman.io/)
+
+**Atom packages**:
+
+* [autoprefixer](http://atom.io/packages/autoprefixer)
+* [editorconfig](http://atom.io/packages/editorconfig)
+* [jshint](http://atom.io/packages/jshint)
+* [language-jade](http://atom.io/packages/language-jade)
+* [sort-lines](http://atom.io/packages/sort-lines)
+* [spacegray-dark-ui](http://atom.io/packages/spacegray-dark-ui)
+* [travis-ci-status](http://atom.io/packages/travis-ci-status)
+* [uglify](http://atom.io/packages/uglify)
+* [visual-bell](http://atom.io/packages/visual-bell)
 
 ### Custom OS X defaults
 
@@ -56,32 +53,6 @@ also be applied independently by running the following command:
 ```bash
 $ osxdefaults
 ```
-
-### Custom bash prompt
-
-When your current working directory is a Git repository, the prompt will
-display the checked-out branch's name (and failing that, the commit SHA that
-HEAD is pointing to). The state of the working tree is reflected in the
-following way:
-
-<table>
-    <tr>
-        <td><code>+</code></td>
-        <td>Uncommitted changes in the index</td>
-    </tr>
-    <tr>
-        <td><code>!</code></td>
-        <td>Unstaged changes</td>
-    </tr>
-    <tr>
-        <td><code>?</code></td>
-        <td>Untracked files</td>
-    </tr>
-    <tr>
-        <td><code>$</code></td>
-        <td>Stashed files</td>
-    </tr>
-</table>
 
 ### Local and private configurations
 

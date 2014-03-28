@@ -1,0 +1,16 @@
+'.source.js':
+    'console.log':
+        'prefix': 'clog'
+        'body': 'console.log($1)$2'
+    'function':
+        'prefix': 'fn'
+        'body': 'function ($1) {\n\t$2\n}'
+    'prototype':
+        'prefix': 'proto'
+        'body': '${1:Class}.prototype.${2:method} = function ($3) {\n\t$4\n};'
+    'require':
+        'prefix': 'req'
+        'body': 'require(\'$1\')$2'
+    'var':
+        'prefix': 'var'
+        'body': 'var $1 = $2;'
