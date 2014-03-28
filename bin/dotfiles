@@ -2,7 +2,7 @@
 # dotfiles installation script
 
 DOTFILES_DIRECTORY="${HOME}/.dotfiles"
-DOTFILES_GIT_REMOTE="git@github.com:necolas/dotfiles.git"
+DOTFILES_GIT_REMOTE="git@github.com:kevva/dotfiles.git"
 DOTFILES_TARBALL_PATH="https://github.com/kevva/dotfiles/tarball/master"
 
 # If missing, download and extract the dotfiles repository
@@ -16,11 +16,10 @@ cd ${DOTFILES_DIRECTORY}
 
 # Source lib files
 source ./lib/help
-source ./lib/list
 source ./lib/utils
 source ./lib/brew
 source ./lib/npm
-source ./lib/subl
+source ./lib/apm
 
 # Help screen
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then

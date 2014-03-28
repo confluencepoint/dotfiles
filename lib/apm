@@ -6,11 +6,24 @@ run_apm() {
     if type_exists 'apm'; then
         log_header "Installing Atom packages..."
 
-        # List of npm packages
-        local packages="autoprefixer editorconfig jshint language-jade sort-lines spacegray-dark-ui travis-ci-status uglify visual-bell"
+        # List of apm packages
+        local -a packages=(
+            'autoprefixer'
+            'editorconfig'
+            'jshint'
+            'language-jade'
+            'sort-lines'
+            'spacegray-dark-ui'
+            'travis-ci-status'
+            'uglify'
+            'visual-bell'
+        )
 
         # Install packages
-        apm install ${packages}
+        for index in ${!packages[*]}
+        do
+            apm install ${packages[$index]}
+        done
 
         [[ $? ]] && log_success "Done"
     else
