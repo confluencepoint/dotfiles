@@ -93,6 +93,7 @@ if [[ ${no_packages} ]]; then
 else
     run_brew
     run_npm
+    run_apm
 fi
 
 # Force create/replace symlink
