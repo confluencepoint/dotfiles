@@ -8,10 +8,13 @@ run_apm() {
 
         # List of apm packages
         local -a packages=(
+            'auto-update-packages'
+            'autocomplete-plus'
             'autoprefixer'
             'editorconfig'
             'jshint'
             'language-jade'
+            'merge-conflicts'
             'sort-lines'
             'spacegray-dark-ui'
             'status-tab-spacing'
