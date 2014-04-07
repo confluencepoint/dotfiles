@@ -1,8 +1,8 @@
 # dotfiles
 
-Dotfiles for bash, git, subl, etc.
+> Dotfiles for bash, git, atom, etc.
 
-## Getting started
+## Install
 
 The installation step requires the [XCode Command Line
 Tools](https://developer.apple.com/downloads) and may overwrite existing
@@ -35,12 +35,18 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 
 **Atom packages**:
 
+* [auto-update-packages](http://atom.io/packages/auto-update-packages)
+* [autocomplete-plus](http://atom.io/packages/autocomplete-plus)
 * [autoprefixer](http://atom.io/packages/autoprefixer)
 * [editorconfig](http://atom.io/packages/editorconfig)
 * [jshint](http://atom.io/packages/jshint)
 * [language-jade](http://atom.io/packages/language-jade)
+* [merge-conflicts](http://atom.io/packages/merge-conflicts)
 * [sort-lines](http://atom.io/packages/sort-lines)
 * [spacegray-dark-ui](http://atom.io/packages/spacegray-dark-ui)
+* [status-tab-spacing](http://atom.io/packages/status-tab-spacing)
+* [tabs-to-spaces](http://atom.io/packages/tabs-to-spaces)
+* [tomorrow-night-eighties-syntax](http://atom.io/packages/tomorrow-night-eighties-syntax)
 * [travis-ci-status](http://atom.io/packages/travis-ci-status)
 * [uglify](http://atom.io/packages/uglify)
 * [visual-bell](http://atom.io/packages/visual-bell)
@@ -86,4 +92,4 @@ your dotfiles repository.
 
 ## License
 
-[MIT License](http://en.wikipedia.org/wiki/MIT_License) (c) [Kevin Mårtensson](http://kevinmartensson.com)
+[MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Kevin Mårtensson](http://kevinmartensson.com)

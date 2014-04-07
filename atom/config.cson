@@ -3,6 +3,7 @@
   'tabLength': 4
   'fontSize': 14
   'showInvisibles': true
+  'showIndentGuide': true
 'core':
   'themes': [
     'spacegray-dark-ui'
@@ -30,3 +31,10 @@
     'Opera 12.1'
   ]
 'whitespace': {}
+'spell-check':
+  'grammars': [
+    'source.gfm'
+    'text.git-commit'
+    'text.plain'
+    'text.plain.null-grammar'
+  ]
