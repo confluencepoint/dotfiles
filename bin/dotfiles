@@ -19,7 +19,7 @@ source ./lib/help
 source ./lib/utils
 source ./lib/brew
 source ./lib/npm
-source ./lib/apm
+source ./lib/subl
 
 # Help screen
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then
@@ -92,7 +92,7 @@ if [[ ${no_packages} ]]; then
 else
     run_brew
     run_npm
-    run_apm
+    run_subl
 fi
 
 # Force create/replace symlink

@@ -1,0 +1,8 @@
+<snippet>
+    <content><![CDATA[
+/* ========================================================================== */
+]]></content>
+    <tabTrigger>ca</tabTrigger>
+    <scope>source.css, source.scss, source.sass, source.less, source.styl</scope>
+    <description>comment.spacing</description>
+</snippet>
