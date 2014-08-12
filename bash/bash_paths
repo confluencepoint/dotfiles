@@ -11,6 +11,7 @@ declare -a dirs_to_prepend=(
 declare -a dirs_to_append=(
     "/usr/bin"
     "${HOME}/bin"
+    "${HOME}/.npm-packages"
     "${HOME}/.dotfiles/bin"
     "$(brew --prefix coreutils)/libexec/gnubin"
     "$(brew --prefix)/share/npm/bin"
@@ -34,6 +35,13 @@ do
     fi
 done
 
+# Append npm global packages directory to NODE_PATH
+NODE_PATH="${HOME}/.npm-packages/lib/node_modules:${NODE_PATH}"
+
+unset MANPATH
 unset dirs_to_prepend dirs_to_append brew_to_append
+
+# Ensure we'll find installed binaries and man pages
+MANPATH="${HOME}/.npm-packages/share/man:$(manpath)"
 
 export PATH

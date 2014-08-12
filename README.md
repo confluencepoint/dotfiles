@@ -27,11 +27,10 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 
 **Node packages**:
 
-* [bower](http://bower.io/)
-* [component](http://component.io/)
 * [gulp](http://gulpjs.com/)
+* [jscs](https://github.com/mdevils/node-jscs/)
 * [jshint](http://jshint.com/)
-* [yo](http://yeoman.io/)
+* [trash](https://github.com/sindresorhus/trash/)
 
 **Sublime Text packages**:
 
@@ -41,6 +40,7 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 * [GitGutter](https://sublime.wbond.net/packages/GitGutter)
 * [SublimeCodeIntel](https://sublime.wbond.net/packages/SublimeCodeIntel)
 * [SublimeLinter](https://sublime.wbond.net/packages/SublimeLinter)
+* [SublimeLinter-jscs](https://sublime.wbond.net/packages/SublimeLinter-jscs)
 * [SublimeLinter-jshint](https://sublime.wbond.net/packages/SublimeLinter-jshint)
 * [SublimeLinter-json](https://sublime.wbond.net/packages/SublimeLinter-json)
 * [Tag](https://sublime.wbond.net/packages/Tag)
@@ -55,7 +55,7 @@ also be applied independently by running the following command:
 $ osxdefaults
 ```
 
-### Local and private configurations
+### Local configuration
 
 Any private and custom commands should be stored in a `~/.bash_profile.local`
 file. Any commands included in this file will not be under version control or

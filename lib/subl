@@ -7,6 +7,7 @@ run_subl() {
     SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
 
     log_header "Writing Sublime Text 3 preferences..."
+
     # If the User directory exists, remove it
     if [[ -d "${SUBLIME_USER_DIRECTORY}" ]]; then
         rm -rf "${SUBLIME_USER_DIRECTORY}"
@@ -22,6 +23,6 @@ run_subl() {
 
     # Create CLI symlink
     ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/slt"
-    
+
     [[ $? ]] && log_success "Done"
 }

@@ -6,6 +6,7 @@
         "GitGutter",
         "SublimeCodeIntel",
         "SublimeLinter",
+        "SublimeLinter-jscs",
         "SublimeLinter-jshint",
         "SublimeLinter-json",
         "Tag",

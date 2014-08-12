@@ -6,11 +6,14 @@ run_npm() {
     if type_exists 'npm'; then
         log_header "Installing Node.js packages..."
 
-        # Give permissions
-        sudo chown -R ${USER} /usr/local
+        # Setup global packages directory
+        mkdir "${HOME}/.npm-packages"
+
+        # Set npm prefix
+        npm config set prefix "${HOME}/.npm-packages"
 
         # List of npm packages
-        local packages="bower component gulp jshint yo"
+        local packages="gulp jscs jshint trash"
 
         # Install packages globally and quietly
         npm install ${packages} --global --quiet
