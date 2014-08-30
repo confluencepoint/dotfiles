@@ -20,12 +20,4 @@ else
 fi
 
 # List all files colorized in long format
-alias l="ls -lAh ${colorflag}"
-
-# Concatenate and print content of files (add line numbers)
-alias catn="cat -n"
-
-# Flush DNS cache
-if [[ $(type -P dscacheutil) ]]; then
-    alias flushdns="dscacheutil -flushcache"
-fi
+alias l="ls -lAhF ${colorflag}"

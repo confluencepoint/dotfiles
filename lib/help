@@ -1,5 +1,5 @@
 #!/bin/bash
-# Help text
+# help
 
 run_help() {
 cat <<EOT

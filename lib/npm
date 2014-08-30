@@ -1,5 +1,5 @@
 #!/bin/bash
-# npm package installation
+# npm
 
 run_npm() {
     # Check for npm
