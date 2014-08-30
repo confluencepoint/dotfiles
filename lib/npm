@@ -4,25 +4,52 @@
 run_npm() {
     # Check for npm
     if type_exists 'npm'; then
-        log_header "Installing Node.js packages..."
-
         # Setup global packages directory
-        mkdir "${HOME}/.npm-packages"
+        mkdir -p "${HOME}/.npm-packages"
 
-        # Set npm prefix
+        # Config npm
         npm config set prefix "${HOME}/.npm-packages"
+        npm config set email "kevinmartensson@gmail.com"
 
-        # List of npm packages
-        local packages="gulp jscs jshint trash"
+        log_header "Updating any existing npm packages..."
 
-        # Install packages globally and quietly
-        npm install ${packages} --global --quiet
-
+        # Update any already-installed packages
+        npm update --global --quiet
         [[ $? ]] && log_success "Done"
+
+        local list_packages
+        local -a missing_packages
+        local -a desired_packages=(
+            'duo'
+            'gulp'
+            'imagemin'
+            'jscs'
+            'jshint'
+            'trash'
+        )
+
+        # Store the name (and options) of every missing package
+        for i in ${!desired_packages[*]}
+        do
+            if ! type_exists ${desired_packages[$i]}; then
+                missing_packages=("${missing_packages[@]}" "${desired_packages[$i]}")
+            fi
+        done
+
+        if [[ "${missing_packages}" ]]; then
+            # Convert the array of missing packages into a list of space-separate strings
+            list_packages=$( printf "%s " "${missing_packages[@]}" )
+
+            log_header "Installing missing npm packages..."
+
+            # Install all missing packages
+            npm install --global --quiet ${list_packages}
+            [[ $? ]] && log_success "Done"
+        fi
     else
         printf "\n"
-        log_error "Error: npm not found."
+        log_error "Error: npm not found"
         printf "Aborting...\n"
-        exit
+        exit 1
     fi
 }
