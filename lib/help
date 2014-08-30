@@ -3,18 +3,14 @@
 
 run_help() {
 cat <<EOT
-dotfiles - Kevin Martensson - http://kevinmartensson.com/
+dotfiles
 
-Usage: $(basename "$0") [options]
+  Usage:
+    $(basename "$0") [options]
 
-Options:
-    -h,  --help          Print this help text
-    -np, --no-packages   Suppress package updates
-    -ns, --no-sync       Suppress pulling from the remote repository
-
-Documentation can be found at https://github.com/kevva/dotfiles/
-
-Copyright (c) Kevin Martensson
-Licensed under the MIT license.
+  Options
+    --help           Print this help text
+    --no-packages    Suppress package updates
+    --no-sync        Suppress pulling from the remote repository
 EOT
 }
