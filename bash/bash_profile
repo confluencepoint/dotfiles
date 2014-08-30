@@ -17,17 +17,28 @@ load_dotfiles() {
         "${HOME}/.dotfiles/bash/functions/"*
         "${HOME}/.dotfiles/bash/bash_prompt"
         "${HOME}/.dotfiles/bash/bash_paths"
-        "$(brew --prefix)/etc/bash_completion"
         "${HOME}/.bash_profile.local"
     )
 
     # If these files are readable, source them
-    for index in ${!files[*]}
+    for i in ${!files[*]}
     do
-        if [[ -r ${files[$index]} ]]; then
-            source "${files[$index]}"
+        if [[ -r ${files[$i]} ]]; then
+            source "${files[$i]}"
         fi
     done
+
+    # Source bash completion on OS X
+    if [[ $(type -P brew) ]] && [[ -r "$(brew --prefix)/etc/bash_completion" ]]; then
+        source "$(brew --prefix)/etc/bash_completion"
+    fi
+
+    # Source nvm
+    export NVM_DIR="${HOME}/.nvm"
+
+    if [ -s "$NVM_DIR/nvm.sh" ]; then
+        source "$NVM_DIR/nvm.sh"
+    fi
 }
 
 load_dotfiles

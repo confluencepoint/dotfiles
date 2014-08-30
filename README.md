@@ -1,6 +1,6 @@
 # dotfiles
 
-> Dotfiles for bash, git, atom, etc.
+> Dotfiles for bash, git, subl, etc.
 
 ## Install
 
@@ -8,7 +8,7 @@ The installation step requires the [XCode Command Line
 Tools](https://developer.apple.com/downloads) and may overwrite existing
 dotfiles in your HOME directory.
 
-```bash
+```sh
 $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 ```
 
@@ -25,9 +25,20 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 * [tree](http://mama.indstate.edu/users/ice/tree/)
 * [wget](http://www.gnu.org/software/wget/)
 
+**APT packages**:
+
+* [git-core](http://git-scm.com/)
+* [Google Chrome](http://google.com/chrome/browser/)
+* [Spotify](http://spotify.com/)
+* [Sublime Text 3](http:/sublimetext.com/3/)
+* [VLC](http://videolan.org/)
+* [wget](http://www.gnu.org/software/wget/)
+
 **Node packages**:
 
+* [duo](http://duojs.org/)
 * [gulp](http://gulpjs.com/)
+* [imagemin](https://github.com/imagemin/imagemin/)
 * [jscs](https://github.com/mdevils/node-jscs/)
 * [jshint](http://jshint.com/)
 * [trash](https://github.com/sindresorhus/trash/)
@@ -46,13 +57,17 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 * [Tag](https://sublime.wbond.net/packages/Tag)
 * [Theme - Spacegray](https://sublime.wbond.net/packages/Theme%20-%20Spacegray)
 
-### Custom OS X defaults
+### Custom OS X and Ubuntu defaults
 
-Custom OS X settings can be applied during the `dotfiles` process. They can
-also be applied independently by running the following command:
+Custom OS X and Ubuntu settings can be applied during the `dotfiles` process.
+They can also be applied independently by running one of the following commands:
 
-```bash
+```sh
+# OS X
 $ osxdefaults
+
+# Ubuntu
+$ ubuntudefaults
 ```
 
 ### Local configuration
@@ -64,7 +79,7 @@ sourced for inclusion in `bash_profile`.
 
 Here is an example `~/.bash_profile.local`:
 
-```bash
+```sh
 # EDITOR export
 export EDITOR="vim"
 
@@ -87,4 +102,4 @@ your dotfiles repository.
 
 ## License
 
-[MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Kevin Mårtensson](http://kevinmartensson.com)
+MIT © [Kevin Mårtensson](https://github.com/kevva)

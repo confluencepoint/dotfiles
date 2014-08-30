@@ -2,23 +2,34 @@
 # subl
 
 run_subl() {
-    SUBLIME_DOTFILES="${DOTFILES_DIRECTORY}/subl"
-    SUBLIME_DIRECTORY="${HOME}/Library/Application Support/Sublime Text 3/Packages"
-    SUBLIME_USER_DIRECTORY="${SUBLIME_DIRECTORY}/User"
+    local dir
 
-    log_header "Writing Sublime Text 3 preferences..."
+    is_os 'darwin'; then
+        dir="${HOME}/Library/Application Support/Sublime Text 3/Packages"
+    elif is_os 'linux'; then
+        dir="${HOME}/.config/sublime-text-3/Packages"
+    fi
 
-    # Remove the User directory
-    rm -rf "${SUBLIME_USER_DIRECTORY}"
+    local dir_user="${dir}/User"
+    local dir_dotfiles="${DOTFILES_DIRECTORY}/subl"
+
+    log_header "Installing Sublime Text 3 preferences..."
+
+    # If the User directory exists, remove it
+    rm -rf "${dir_user}"
 
     # Symlink the folder
-    ln -fs "${SUBLIME_DOTFILES}" "${SUBLIME_USER_DIRECTORY}"
+    ln -fs "${dir_dotfiles}" "${dir_user}"
 
-    # Create `~/bin`
+    # Create `~/bin` if it doesn't exist
     mkdir -p "${HOME}/bin"
 
     # Create CLI symlink
-    ln -fs "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/slt"
+    is_os 'darwin'; then
+        ln -fs "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/slt"
+    elif is_os 'linux'; then
+        ln -fs "/opt/sublime_text/sublime_text" "${HOME}/bin/slt"
+    fi
 
     [[ $? ]] && log_success "Done"
 }

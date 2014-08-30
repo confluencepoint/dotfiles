@@ -54,7 +54,7 @@ run_brew() {
         brew cleanup
     else
         printf "\n"
-        log_error "Error: Homebrew not found."
+        log_error "Error: Homebrew not found"
         printf "Aborting...\n"
         exit
     fi

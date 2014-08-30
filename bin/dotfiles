@@ -30,7 +30,7 @@ check_dotfiles() {
 
 # Before relying on Homebrew, check that packages can be compiled
 check_gcc() {
-    if ! type_exists 'gcc'; then
+    if ! type_exists 'gcc' && is_os 'darwin'; then
         log_error "The XCode Command Line Tools must be installed first"
         printf "  Download them from: https://developer.apple.com/downloads\n"
         printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
@@ -40,7 +40,7 @@ check_gcc() {
 
 # Check for Homebrew
 check_brew() {
-    if ! type_exists 'brew'; then
+    if ! type_exists 'brew' && is_os 'darwin'; then
         log_header "Installing Homebrew..."
         ruby -e "$(curl -fsSkL https://raw.github.com/Homebrew/homebrew/go/install)"
     fi
@@ -49,10 +49,16 @@ check_brew() {
 # Check for git
 check_git() {
     if ! type_exists 'git'; then
-        log_header "Updating Homebrew..."
-        brew update &> /dev/null
-        log_header "Installing Git..."
-        brew install git
+        if is_os 'darwin'; then
+            log_header "Updating Homebrew..."
+            brew update &> /dev/null
+            log_header "Installing Git..."
+            brew install git
+        elif is_os 'linux'; then
+            log_header "Installing Git..."
+            sudo apt-get update -qqy &> /dev/null
+            sudo apt-get install --allow-unauthenticated -qqy git-core
+        fi
     fi
 }
 
@@ -104,10 +110,23 @@ run_packages() {
     if [[ ${no_packages} ]]; then
         printf "Skipped package installations\n"
     else
-        source ./lib/brew
-        run_brew
+        if is_os 'linux'; then
+            source ./lib/apt
+            run_apt
+        elif is_os 'darwin'; then
+            source ./lib/brew
+            run_brew
+        fi
+
         source ./lib/npm
         run_npm
+    fi
+}
+
+# Fix privacy related issues present in Ubuntu
+privacy() {
+    if is_os 'linux'; then
+        wget -qO - https://fixubuntu.com/fixubuntu.sh | bash
     fi
 }
 
@@ -149,13 +168,29 @@ confirm_dotfiles() {
 
 # Ask before potentially overwriting OS X defaults
 confirm_osx() {
-    seek_confirmation "Warning: This step may modify your OS X system defaults"
+    if is_os 'darwin'; then
+        seek_confirmation "Warning: This step may modify your OS X system defaults"
 
-    if is_confirmed; then
-        bash ./bin/osxdefaults
-        log_success "OS X settings updated!"
-    else
-        printf "Skipped OS X settings update\n"
+        if is_confirmed; then
+            bash ./bin/osxdefaults
+            log_success "OS X settings updated!"
+        else
+            printf "Skipped OS X settings update\n"
+        fi
+    fi
+}
+
+# Ask before potentially overwriting Ubuntu defaults
+confirm_ubuntu() {
+    if is_os 'linux'; then
+        seek_confirmation "Warning: This step may modify your Ubuntu system defaults"
+
+        if is_confirmed; then
+            bash ./bin/ubuntudefaults
+            log_success "Ubuntu settings updated!"
+        else
+            printf "Skipped Ubuntu settings update\n"
+        fi
     fi
 }
 
@@ -206,9 +241,13 @@ run() {
     # Install packages
     run_packages
 
+    # Fix privacy settings in Ubuntu
+    privacy
+
     # Confirm before applying settings
     confirm_dotfiles
     confirm_osx
+    confirm_ubuntu
     confirm_slt
 }
 
