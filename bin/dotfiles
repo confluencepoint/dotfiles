@@ -220,6 +220,7 @@ run() {
 
     # Show help
     if [[ ${help} ]]; then
+        source ./lib/help
         run_help
         exit
     fi
