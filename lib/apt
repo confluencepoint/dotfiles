@@ -9,7 +9,7 @@ run_apt() {
         sudo apt-get update -qqy &> /dev/null
 
         # Update any already-installed packages
-        sudo apt-get dist-upgrade -qqy
+        sudo apt-get dist-upgrade -qqy &> /dev/null
 
         # Install core packages
         sudo apt-get install --allow-unauthenticated -qqy build-essential software-properties-common &> /dev/null

@@ -50,9 +50,8 @@ check_brew() {
 check_git() {
     if ! type_exists 'git'; then
         if is_os 'darwin'; then
-            log_header "Updating Homebrew..."
-            brew update &> /dev/null
             log_header "Installing Git..."
+            brew update &> /dev/null
             brew install git
         elif is_os 'linux'; then
             log_header "Installing Git..."
@@ -126,7 +125,7 @@ run_packages() {
 # Fix privacy related issues present in Ubuntu
 privacy() {
     if is_os 'linux'; then
-        wget -qO - https://fixubuntu.com/fixubuntu.sh | bash
+        wget -qO - https://fixubuntu.com/fixubuntu.sh | bash &> /dev/null
     fi
 }
 

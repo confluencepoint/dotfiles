@@ -4,13 +4,10 @@
 run_brew() {
     # Check for Homebrew
     if type_exists 'brew'; then
-        log_header "Updating Homebrew..."
+        log_header "Updating any existing Homebrew formulae..."
 
         # Use the latest version of Homebrew
-        brew update
-        [[ $? ]] && log_success "Done"
-
-        log_header "Updating any existing Homebrew formulae..."
+        brew update &> /dev/null
 
         # Upgrade any already-installed formulae
         brew upgrade
