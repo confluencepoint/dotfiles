@@ -21,7 +21,7 @@
     "show_full_path": true,
     "tab_size": 4,
     "theme": "Spacegray.sublime-theme",
-    "translate_tabs_to_spaces": true,
+    "translate_tabs_to_spaces": false,
     "tree_animation_enabled": false,
     "trim_trailing_white_space_on_save": true,
     "word_wrap": "true"
