@@ -4,7 +4,7 @@
 run_subl() {
     local dir
 
-    is_os 'darwin'; then
+    if is_os 'darwin'; then
         dir="${HOME}/Library/Application Support/Sublime Text 3/Packages"
     elif is_os 'linux'; then
         dir="${HOME}/.config/sublime-text-3/Packages"
@@ -25,7 +25,7 @@ run_subl() {
     mkdir -p "${HOME}/bin"
 
     # Create CLI symlink
-    is_os 'darwin'; then
+    if is_os 'darwin'; then
         ln -fs "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/slt"
     elif is_os 'linux'; then
         ln -fs "/opt/sublime_text/sublime_text" "${HOME}/bin/slt"
