@@ -65,7 +65,7 @@ set_prompts() {
     readonly green=$(tput setaf 64)
     readonly orange=$(tput setaf 166)
     readonly purple=$(tput setaf 125)
-    readonly red=$(tput setaf 124)
+    readonly red=$(tput setaf 1)
     readonly white=$(tput setaf 15)
     readonly yellow=$(tput setaf 136)
 
