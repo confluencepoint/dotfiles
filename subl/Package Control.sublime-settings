@@ -1,15 +1,15 @@
 {
-    "installed_packages": [
-        "BracketHighlighter",
-        "DocBlockr",
-        "EditorConfig",
-        "GitGutter",
-        "SublimeCodeIntel",
-        "SublimeLinter",
-        "SublimeLinter-jscs",
-        "SublimeLinter-jshint",
-        "SublimeLinter-json",
-        "Tag",
-        "Theme - Spacegray"
-    ]
+	"installed_packages": [
+		"BracketHighlighter",
+		"DocBlockr",
+		"EditorConfig",
+		"GitGutter",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"SublimeLinter-jscs",
+		"SublimeLinter-jshint",
+		"SublimeLinter-json",
+		"Tag",
+		"Theme - Spacegray"
+	]
 }

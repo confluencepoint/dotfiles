@@ -3,49 +3,49 @@
 
 # Directories to be prepended to PATH
 declare -a dirs_to_prepend=(
-    # Ensure that this bin always takes precedence over `/usr/bin`
-    "/usr/local/bin"
+	# Ensure that this bin always takes precedence over `/usr/bin`
+	"/usr/local/bin"
 )
 
 # Directories to be appended to PATH
 declare -a dirs_to_append=(
-    "/usr/bin"
-    "${HOME}/bin"
-    "${HOME}/.npm-packages/bin"
-    "${HOME}/.dotfiles/bin"
+	"/usr/bin"
+	"${HOME}/bin"
+	"${HOME}/.npm-packages/bin"
+	"${HOME}/.dotfiles/bin"
 )
 
 # Brew directories to be appended to PATH
 if [[ $(type -P brew) ]]; then
-    declare -a brew_to_append=(
-        "$(brew --prefix coreutils)/libexec/gnubin"
-    )
+	declare -a brew_to_append=(
+		"$(brew --prefix coreutils)/libexec/gnubin"
+	)
 fi
 
 # Prepend directories to PATH
 for i in ${!dirs_to_prepend[*]}
 do
-    if [ -d ${dirs_to_prepend[$i]} ]; then
-        PATH="${dirs_to_prepend[$i]}:${PATH}"
-    fi
+	if [ -d ${dirs_to_prepend[$i]} ]; then
+		PATH="${dirs_to_prepend[$i]}:${PATH}"
+	fi
 done
 
 # Append directories to PATH
 for i in ${!dirs_to_append[*]}
 do
-    if [ -d ${dirs_to_append[$i]} ]; then
-        PATH="${PATH}:${dirs_to_append[$i]}"
-    fi
+	if [ -d ${dirs_to_append[$i]} ]; then
+		PATH="${PATH}:${dirs_to_append[$i]}"
+	fi
 done
 
 # Append brew directories to PATH
 if [[ $(type -P brew) ]]; then
-    for i in ${!brew_to_append[*]}
-    do
-        if [ -d ${brew_to_append[$i]} ]; then
-            PATH="${PATH}:${brew_to_append[$i]}"
-        fi
-    done
+	for i in ${!brew_to_append[*]}
+	do
+		if [ -d ${brew_to_append[$i]} ]; then
+			PATH="${PATH}:${brew_to_append[$i]}"
+		fi
+	done
 fi
 
 # Append npm global packages directory to NODE_PATH

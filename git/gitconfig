@@ -1,40 +1,40 @@
 [alias]
-    c = clone --recursive
-    ca = !git add -A && git commit -av
-    credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
-    d = "!git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-    di = "!f() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; f"
-    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-    go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
-    gr = log --pretty=nice --date-order --graph
-    gra = log --pretty=nice --date-order --graph --all
-    l = log --stat --format=oneline --abbrev-commit
-    p = !bash -c 'git push ${1-origin} ${2-master}' -
-    po = !bash -c 'git push origin ${1-master}' -
-    pr = "!git pull --rebase; git submodule foreach git pull --rebase origin master"
-    reb = "!f() { git rebase -i HEAD~$1; }; f"
-    s = status -s
+	c = clone --recursive
+	ca = !git add -A && git commit -av
+	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+	d = "!git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	di = "!f() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; f"
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	gr = log --pretty=nice --date-order --graph
+	gra = log --pretty=nice --date-order --graph --all
+	l = log --stat --format=oneline --abbrev-commit
+	p = !bash -c 'git push ${1-origin} ${2-master}' -
+	po = !bash -c 'git push origin ${1-master}' -
+	pr = "!git pull --rebase; git submodule foreach git pull --rebase origin master"
+	reb = "!f() { git rebase -i HEAD~$1; }; f"
+	s = status -s
 
 [color]
-    ui = auto
-    interactive = auto
+	ui = auto
+	interactive = auto
 
 [core]
-    excludesfile = ~/.gitignore
-    attributesfile = ~/.gitattributes
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
 
 [diff]
-    renames = copies
-    tool = mvimdiff
+	renames = copies
+	tool = mvimdiff
 
 [difftool]
-    prompt = false
+	prompt = false
 
 [help]
-    autocorrect = 1
+	autocorrect = 1
 
 [pretty]
-    nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
+	nice = "%C(yellow)%h%C(reset) %C(white)%s%C(cyan)%d%C(reset) -- %an; %ar"
 
 [push]
-    default = simple
+	default = simple

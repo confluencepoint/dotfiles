@@ -67,14 +67,14 @@ gsettings set com.ubuntu.sound allow-amplified-volume true
 
 # Unity Launcher favorites
 gsettings set com.canonical.Unity.Launcher favorites "[
-    'application://nautilus.desktop',
-    'application://google-chrome.desktop',
-    'application://sublime-text.desktop',
-    'application://gnome-terminal.desktop',
-    'application://spotify.desktop',
-    'application://unity-control-center.desktop',
-    'unity://running-apps',
-    'application://ubuntu-software-center.desktop',
-    'unity://expo-icon',
-    'unity://devices'
+	'application://nautilus.desktop',
+	'application://google-chrome.desktop',
+	'application://sublime-text.desktop',
+	'application://gnome-terminal.desktop',
+	'application://spotify.desktop',
+	'application://unity-control-center.desktop',
+	'unity://running-apps',
+	'application://ubuntu-software-center.desktop',
+	'unity://expo-icon',
+	'unity://devices'
 ]"

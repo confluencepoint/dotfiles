@@ -1,11 +1,11 @@
 {
-    "user": {
-        "delay": 0,
-        "linters": {
-            "csslint": {
-                "ignore": "ids, import, box-model, box-sizing"
-            }
-        },
-        "sublimelinter_mark_style": "fill"
-    }
+	"user": {
+		"delay": 0,
+		"linters": {
+			"csslint": {
+				"ignore": "ids, import, box-model, box-sizing"
+			}
+		},
+		"sublimelinter_mark_style": "fill"
+	}
 }

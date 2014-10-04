@@ -6,11 +6,11 @@ cat <<EOT
 dotfiles
 
   Usage:
-    $(basename "$0") [options]
+	$(basename "$0") [options]
 
   Options
-    --help           Print this help text
-    --no-packages    Suppress package updates
-    --no-sync        Suppress pulling from the remote repository
+	--help		   Print this help text
+	--no-packages	Suppress package updates
+	--no-sync		Suppress pulling from the remote repository
 EOT
 }

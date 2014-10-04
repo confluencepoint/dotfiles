@@ -2,5 +2,5 @@
 # List globally installed npm packages
 
 npmls() {
-    npm ls -gp | awk -F/ '/node_modules/ && !/node_modules.*node_modules/ {print $NF}'
+	npm ls -gp | awk -F/ '/node_modules/ && !/node_modules.*node_modules/ {print $NF}'
 }
