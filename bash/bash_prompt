@@ -2,7 +2,7 @@
 # bash_prompt
 
 # Example:
-# kevva@host: ~/.dotfiles on master [+!?$]
+# kevva@host: ~/.dotfiles on master [+!?$ab]
 # $
 
 # Git status information
@@ -19,22 +19,32 @@ prompt_git() {
 
 			# Check for uncommitted changes in the index
 			if ! $(git diff --quiet --ignore-submodules --cached); then
-				s="$s+";
+				s+="+";
 			fi
 
 			# Check for unstaged changes
 			if ! $(git diff-files --quiet --ignore-submodules --); then
-				s="$s!";
+				s+="!";
 			fi
 
 			# Check for untracked files
-			if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-				s="$s?";
+			if [[ -n "$(git ls-files --others --exclude-standard)" ]]; then
+				s+="?";
 			fi
 
 			# Check for stashed files
-			if $(git rev-parse --verify refs/stash &>/dev/null); then
-				s="$s$";
+			if $(git rev-parse --verify refs/stash &> /dev/null); then
+				s+="$";
+			fi
+
+			# Check if branch is behind remote
+			if [[ $(git rev-list --right-only --count HEAD...@'{u}' 2> /dev/null) -gt 0 ]]; then
+				s+="b"
+			fi
+
+			# Check if branch is ahead of remote
+			if [[ $(git rev-list --left-only --count HEAD...@'{u}' 2> /dev/null) -gt 0 ]]; then
+				s+="a"
 			fi
 		fi
 
@@ -45,9 +55,9 @@ prompt_git() {
 					  git rev-parse --short HEAD 2> /dev/null || \
 					  printf "(unknown)")"
 
-		[[ -n "$s" ]] && s=" [$s]"
+		[[ -n "$s" ]] && s=" [${s}]"
 
-		printf "%s" "$1$branchName$s"
+		printf "%s" "$1${branchName}${s}"
 	else
 		return
 	fi
