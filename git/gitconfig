@@ -11,7 +11,7 @@
 	l = log --stat --format=oneline --abbrev-commit
 	p = !bash -c 'git push ${1-origin} ${2-master}' -
 	po = !bash -c 'git push origin ${1-master}' -
-	pr = "!git pull --rebase; git submodule foreach git pull --rebase origin master"
+	pr = !bash -c 'git pull --rebase ${1-origin} ${2-master} && git submodule foreach git pull --rebase origin master' -
 	reb = "!f() { git rebase -i HEAD~$1; }; f"
 	s = status -s
 
