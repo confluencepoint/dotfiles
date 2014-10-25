@@ -13,6 +13,9 @@
 	po = !bash -c 'git push origin ${1-master}' -
 	pr = !bash -c 'git pull --rebase ${1-origin} ${2-master} && git submodule foreach git pull --rebase origin master' -
 	reb = "!f() { git rebase -i HEAD~$1; }; f"
+	reba = rebase --abort
+	rebc = rebase --continue
+	rebs = rebase --skip
 	s = status -s
 
 [color]
