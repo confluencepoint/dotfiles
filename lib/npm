@@ -21,6 +21,7 @@ run_npm() {
 		local -a missing_packages
 		local -a desired_packages=(
 			'duo'
+			'empty-trash'
 			'gulp'
 			'imagemin'
 			'jscs'

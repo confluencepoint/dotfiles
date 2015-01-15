@@ -37,6 +37,7 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 **Node packages**:
 
 * [duo](http://duojs.org/)
+* [empty-trash](https://github.com/sindresorhus/empty-trash/)
 * [gulp](http://gulpjs.com/)
 * [imagemin](https://github.com/imagemin/imagemin/)
 * [jscs](https://github.com/mdevils/node-jscs/)
