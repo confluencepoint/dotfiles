@@ -5,7 +5,7 @@
 ## Install
 
 The installation step requires the [XCode Command Line
-Tools](https://developer.apple.com/downloads) and may overwrite existing
+Tools](https://developer.apple.com/downloads) (on OS X) and may overwrite existing
 dotfiles in your HOME directory.
 
 ```sh
