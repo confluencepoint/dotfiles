@@ -1,9 +1,13 @@
 {
 	"installed_packages": [
+		"All Autocomplete",
+		"AutoFileName",
 		"BracketHighlighter",
 		"DocBlockr",
 		"EditorConfig",
+		"EncodingHelper",
 		"GitGutter",
+		"Markdown Extended",
 		"SublimeCodeIntel",
 		"SublimeLinter",
 		"SublimeLinter-jscs",

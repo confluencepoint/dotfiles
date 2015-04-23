@@ -46,10 +46,14 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 
 **Sublime Text packages**:
 
+* [All Autocomplete](https://packagecontrol.io/packages/All%20Autocomplete)
+* [AutoFileName](https://packagecontrol.io/packages/AutoFileName)
 * [BracketHighlighter](https://sublime.wbond.net/packages/BracketHighlighter)
 * [DocBlockr](https://sublime.wbond.net/packages/DocBlockr)
 * [EditorConfig](https://sublime.wbond.net/packages/EditorConfig)
+* [EncodingHelper](https://sublime.wbond.net/packages/EncodingHelper)
 * [GitGutter](https://sublime.wbond.net/packages/GitGutter)
+* [Markdown Extended](https://sublime.wbond.net/packages/Markdown%20Extended)
 * [SublimeCodeIntel](https://sublime.wbond.net/packages/SublimeCodeIntel)
 * [SublimeLinter](https://sublime.wbond.net/packages/SublimeLinter)
 * [SublimeLinter-jscs](https://sublime.wbond.net/packages/SublimeLinter-jscs)
