@@ -2,6 +2,7 @@
 
 > Dotfiles for bash, git, subl, etc.
 
+
 ## Install
 
 The installation step requires the [XCode Command Line
@@ -11,6 +12,7 @@ dotfiles in your HOME directory.
 ```sh
 $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 ```
+
 
 ## Features
 
@@ -104,6 +106,7 @@ git config --global user.email "$GIT_AUTHOR_EMAIL"
 The `git/gitconfig` file is copied to `~/.gitconfig`, so any private git
 configuration specified in `~/.bash_profile.local` will not be committed to
 your dotfiles repository.
+
 
 ## License
 
