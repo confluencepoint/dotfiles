@@ -10,7 +10,7 @@ alias ~="cd ~"
 alias -- -="cd -"
 
 # Enable aliases to be sudo'ed
-alias sudo='sudo '
+alias sudo="sudo "
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then

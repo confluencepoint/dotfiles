@@ -5,6 +5,7 @@
 declare -a dirs_to_prepend=(
 	# Ensure that this bin always takes precedence over `/usr/bin`
 	"/usr/local/bin"
+	"${HOME}/.npm-packages/bin"
 )
 
 # Directories to be appended to PATH
