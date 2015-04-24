@@ -32,7 +32,7 @@ run_apt() {
 			add_source_list "http://dl.google.com/linux/deb/ stable main" "google-chrome.list"
 		fi
 
-		if ! type_exists 'slt'; then
+		if ! type_exists 'subl'; then
 			add_repo "ppa:webupd8team/sublime-text-3"
 		fi
 
