@@ -65,7 +65,7 @@ check_git() {
 check_nvm() {
 	if ! type_exists 'node'; then
 		log_header "Installing nvm..."
-		curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash
+		curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v0.25.0/install.sh | bash
 		source ${HOME}/.nvm/nvm.sh
 	fi
 }
