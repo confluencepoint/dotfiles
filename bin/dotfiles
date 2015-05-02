@@ -72,7 +72,7 @@ check_nvm() {
 
 # Check for node
 check_node() {
-	local version="iojs-v1.5.0"
+	local version="iojs"
 
 	if ! type_exists 'node'; then
 		log_header "Installing node..."
