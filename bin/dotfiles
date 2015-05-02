@@ -123,13 +123,6 @@ run_packages() {
 	fi
 }
 
-# Fix privacy related issues present in Ubuntu
-privacy() {
-	if is_os 'linux'; then
-		wget -qO - https://fixubuntu.com/fixubuntu.sh | bash &> /dev/null
-	fi
-}
-
 # Force create/replace symlink
 link() {
 	ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
@@ -242,9 +235,6 @@ run() {
 
 	# Install packages
 	run_packages
-
-	# Fix privacy settings in Ubuntu
-	privacy
 
 	# Confirm before applying settings
 	confirm_dotfiles
