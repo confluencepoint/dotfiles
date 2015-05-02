@@ -1,5 +1,4 @@
 #!/bin/bash
-# bash_paths
 
 # Directories to be prepended to PATH
 declare -a dirs_to_prepend=(

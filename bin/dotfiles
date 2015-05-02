@@ -1,5 +1,4 @@
 #!/bin/bash
-# dotfiles
 set -e
 
 readonly DOTFILES_DIRECTORY="${HOME}/.dotfiles"

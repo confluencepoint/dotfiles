@@ -1,5 +1,4 @@
 #!/bin/bash
-# subl
 
 run_subl() {
 	local dir

@@ -1,4 +1,5 @@
 #!/bin/bash
-# bashrc
 
-[[ -n "${PS1}" ]] && source "${HOME}/.bash_profile"
+if [[ -n "${PS1}" ]]; then
+	source "${HOME}/.bash_profile"
+fi

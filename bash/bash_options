@@ -1,5 +1,4 @@
 #!/bin/bash
-# bash_options
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob

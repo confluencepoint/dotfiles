@@ -1,5 +1,4 @@
 #!/bin/bash
-# npm
 
 run_npm() {
 	# Check for npm

@@ -1,5 +1,4 @@
 #!/bin/bash
-# brew
 
 run_brew() {
 	# Check for Homebrew

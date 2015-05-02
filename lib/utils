@@ -1,5 +1,4 @@
 #!/bin/bash
-# utils
 
 # Header logging
 log_header() {

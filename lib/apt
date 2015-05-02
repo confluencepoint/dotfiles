@@ -1,5 +1,4 @@
 #!/bin/bash
-# apt
 
 run_apt() {
 	if type_exists 'apt-get'; then

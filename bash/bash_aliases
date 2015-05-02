@@ -1,5 +1,4 @@
 #!/bin/bash
-# bash_aliases
 
 # Easier navigation
 alias ..="cd .."
