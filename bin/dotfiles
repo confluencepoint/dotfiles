@@ -41,7 +41,7 @@ check_gcc() {
 check_brew() {
 	if ! type_exists 'brew' && is_os 'darwin'; then
 		log_header "Installing Homebrew..."
-		ruby -e "$(curl -fsSkL https://raw.github.com/Homebrew/homebrew/go/install)"
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	fi
 }
 
